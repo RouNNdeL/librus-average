@@ -1,0 +1,23 @@
+{
+    "manifest_version": 2,
+    "name": "Librus Average",
+    "description": "This extension shows averages hidden by Synergia",
+    "version": "1.0",
+    "options_page": "html/options.html",
+    "content_scripts": [
+        {
+            "matches": [
+                "https://synergia.librus.pl/przegladaj_oceny/uczen"
+            ],
+            "js": [
+                "js/jquery-3.2.1.min.js",
+                "js/content_script.js"
+            ]
+        }
+    ],
+    "permissions": [
+        "tabs",
+        "storage",
+        "https://synergia.librus.pl/"
+    ]
+}
