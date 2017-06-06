@@ -12,12 +12,24 @@ $(function()
     registerOnChangedListener();
 });
 
+/**
+ * A simple object tah represents a grade/mark
+ * @param mark
+ * @param weight
+ * @constructor
+ */
 function Mark(mark, weight)
 {
     this.mark = mark;
     this.weight = weight;
 }
 
+/**
+ * An object containing an array of {@link Mark Marks} and also offering some other functionality
+ * (ex. {@link MarkList.getAverage getAverage()});
+ * @param {Mark[]} markList an array of {@link Mark Marks} to create the object from
+ * @constructor
+ */
 function MarkList(markList)
 {
     if(markList === undefined)
@@ -43,17 +55,27 @@ function MarkList(markList)
         return weightSum !== 0 ? markSum / weightSum : 0;
     };
 
+    /**
+     * Creates a new {@link MarkList} object that contains {@link Mark Marks} from <code>this</code> and the provided {@link MarkList}
+     * @param {MarkList} list to be concatenated with <code>this</code>
+     * @returns {MarkList} a new object containing all marks
+     */
     this.concat = function(list)
     {
         return new MarkList(this.markList.concat(list.markList));
     };
 }
 
+/**
+ * Registers a {@link  chrome.storage.onChanged} listener to update the averages when the settings change
+ */
 function registerOnChangedListener()
 {
     //noinspection JSUnresolvedVariable
-    chrome.storage.onChanged.addListener(function(changes, namespace) {
-        for (let key in changes) {
+    chrome.storage.onChanged.addListener(function(changes, namespace)
+    {
+        for(let key in changes)
+        {
             if(key === SETTINGS)
             {
                 setup(changes[SETTINGS]["newValue"])
