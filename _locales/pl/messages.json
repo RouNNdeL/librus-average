@@ -1,9 +1,9 @@
 {
     "app_name": {
-        "message": "Średnia do Librusa"
+        "message": "Średnia ważona do Librusa"
     },
     "app_description": {
-        "message": "To rozszerzenie liczy średnią twoich ocen w systemie Librus Syngergia"
+        "message": "To rozszerzenie liczy średnią ważoną twoich ocen w dzienniku elektronicznym Librus Syngergia"
     },
     "options_title": {
         "message": "Ustawienia"
