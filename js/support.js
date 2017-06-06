@@ -28,9 +28,10 @@ const DEFAULT_SETTINGS = {
 
 function loadSettings(callback)
 {
-    chrome.storage.sync.get(SETTINGS, function(items)
+    chrome.storage.sync.get(function(items)
     {
         let settings = items[SETTINGS];
+        console.log(items);
         if(settings === undefined || settings === null)
         {
             settings = DEFAULT_SETTINGS;
@@ -42,8 +43,16 @@ function loadSettings(callback)
 
 function saveSettings(settings, callback)
 {
-    if(typeof callback == "function")
-        chrome.storage.sync.set({SETTINGS: settings}, callback);
+    if(typeof callback === "function")
+    {
+        const obj = {};
+        obj[SETTINGS] = settings;
+        chrome.storage.sync.set(obj, callback);
+    }
     else
-        chrome.storage.sync.set({SETTINGS: settings});
+    {
+        const obj = {};
+        obj[SETTINGS] = settings;
+        chrome.storage.sync.set(obj);
+    }
 }

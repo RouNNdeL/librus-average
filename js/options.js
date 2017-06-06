@@ -48,7 +48,7 @@ function loadForm(settings)
     defaultWeight.val(settings.defaultWeight);
     plusWeight.val(settings.plusWeight);
     minusWeight.val(settings.minusWeight);
-    policy.val(settings.respectPolicy);
+    policy.prop("checked", settings.respectPolicy);
 }
 
 function saveForm(notify = false)
@@ -60,10 +60,12 @@ function saveForm(notify = false)
     const minusWeight = $("#input-minus-weight");
     const policy = $("#checkbox-policy");
 
-    settings.defaultWeight = defaultWeight.val();
-    settings.plusWeight = plusWeight.val();
-    settings.minusWeight = minusWeight.val();
-    settings.respectPolicy = policy.val();
+    settings.defaultWeight = parseInt(defaultWeight.val());
+    settings.plusWeight = parseFloat(plusWeight.val());
+    settings.minusWeight = parseFloat(minusWeight.val());
+    settings.respectPolicy = policy.val() === "true";
+
+    console.log(settings);
 
     saveSettings(settings, function()
     {
