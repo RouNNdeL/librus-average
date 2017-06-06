@@ -2,8 +2,8 @@
     "manifest_version": 2,
     "name": "__MSG_app_name__",
     "description": "__MSG_app_description__",
-    "version": "1.2.2",
-    "version_name": "1.2.2",
+    "version": "1.2.3",
+    "version_name": "1.2.3",
     "default_locale": "en",
     "browser_action": {
         "default_popup": "html/options.html"
