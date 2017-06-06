@@ -162,19 +162,28 @@ function setup(settings = DEFAULT_SETTINGS)
             let secondTermMarks = getMarks(this, SECOND_TERM_INDEX, settings);
             let yearMarks = firstTermMarks.concat(secondTermMarks);
 
+            const firstTermCell = $(this).find("td").eq(FIRST_TERM_AVG);
+            //Required, as Librus forgot to add that class for this cell
+            firstTermCell.addClass("center");
             if(firstTermMarks.getAverage() > 0)
-                $(this).find("td").eq(FIRST_TERM_AVG).text(firstTermMarks.getAverage().toFixed(2));
+                firstTermCell.text(firstTermMarks.getAverage().toFixed(2));
             else
-                $(this).find("td").eq(FIRST_TERM_AVG).text("-");
+                firstTermCell.text("-");
 
+            const secondTermCell = $(this).find("td").eq(SECOND_TERM_AVG);
+            //Not required, but we'll add the class just in case
+            secondTermCell.addClass("center");
             if(secondTermMarks.getAverage() > 0)
-                $(this).find("td").eq(SECOND_TERM_AVG).text(secondTermMarks.getAverage().toFixed(2));
+                secondTermCell.text(secondTermMarks.getAverage().toFixed(2));
             else
-                $(this).find("td").eq(SECOND_TERM_AVG).text("-");
+                secondTermCell.text("-");
 
+            const yearCell = $(this).find("td").eq(YEAR_AVG);
+            //Not required, but we'll add the class just in case
+            yearCell.addClass("center");
             if(yearMarks.getAverage() > 0)
-                $(this).find("td").eq(YEAR_AVG).text(yearMarks.getAverage().toFixed(2));
+                yearCell.text(yearMarks.getAverage().toFixed(2));
             else
-                $(this).find("td").eq(YEAR_AVG).text("-");
+                yearCell.text("-");
         });
 }

@@ -20,7 +20,6 @@
         }
     ],
     "permissions": [
-        "tabs",
         "storage",
         "https://synergia.librus.pl/",
         "https://fonts.googleapis.com/"
