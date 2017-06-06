@@ -3,7 +3,7 @@
  */
 'use strict';
 
-$(function(e)
+$(function()
 {
     loadSettings(function(settings)
     {
@@ -83,7 +83,7 @@ function getMarks(row, column, settings = DEFAULT_SETTINGS)
 {
     let marks = new MarkList();
 
-    $(row).find("td").eq(column).find("span.grade-box  a").each(function(i)
+    $(row).find("td").eq(column).find("span.grade-box  a").each(function()
     {
         let rawMark = $(this).text();
         let markDescription = $(this).attr("title");
@@ -121,7 +121,7 @@ function setup(settings = DEFAULT_SETTINGS)
     //noinspection CssInvalidPseudoSelector
     $("table.decorated.stretch tbody tr:regex(class, line[0,1])")
         .not("tr:regex(name, przedmioty_all)")
-        .each(function(i)
+        .each(function()
         {
             let firstTermMarks = getMarks(this, FIRST_TERM_INDEX, settings);
             let secondTermMarks = getMarks(this, SECOND_TERM_INDEX, settings);

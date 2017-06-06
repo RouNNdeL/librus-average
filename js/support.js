@@ -36,6 +36,7 @@ const DEFAULT_SETTINGS = {
  */
 function loadSettings(callback)
 {
+    //noinspection JSUnresolvedVariable
     chrome.storage.sync.get(function(items)
     {
         let settings = items[SETTINGS];
@@ -60,12 +61,14 @@ function saveSettings(settings, callback)
     {
         const obj = {};
         obj[SETTINGS] = settings;
+        //noinspection JSUnresolvedVariable
         chrome.storage.sync.set(obj, callback);
     }
     else
     {
         const obj = {};
         obj[SETTINGS] = settings;
+        //noinspection JSUnresolvedVariable
         chrome.storage.sync.set(obj);
     }
 }
@@ -81,12 +84,14 @@ function clearSettings(callback)
     {
         const obj = {};
         obj[SETTINGS] = DEFAULT_SETTINGS;
+        //noinspection JSUnresolvedVariable
         chrome.storage.sync.set(obj, callback);
     }
     else
     {
         const obj = {};
         obj[SETTINGS] = DEFAULT_SETTINGS;
+        //noinspection JSUnresolvedVariable
         chrome.storage.sync.set(obj);
     }
 }

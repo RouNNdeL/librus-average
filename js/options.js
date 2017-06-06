@@ -2,10 +2,8 @@
  * Created by Krzysiek on 06/06/2017.
  */
 
-const MINUS_REGEX = /!minus_weight!/;
-const PLUS_REGEX = /!plus_weight!/;
 
-$(function(e)
+$(function()
 {
     localizeHtmlPage();
     localizeHintData();
@@ -30,11 +28,12 @@ function refreshForm()
  */
 function localizeHintData()
 {
-    $(".tooltipped").each(function(i)
+    $(".tooltipped").each(function()
     {
         const tag = $(this).attr("data-tooltip");
         const msg = tag.replace(/__MSG_(\w+)__/g, function(match, v1)
         {
+            //noinspection JSUnresolvedVariable,JSUnresolvedFunction
             return v1 ? chrome.i18n.getMessage(v1) : '';
         });
         $(this).attr("data-tooltip", msg);
@@ -50,6 +49,7 @@ function registerListeners()
     {
         saveForm(true)
     });
+    //noinspection JSUnresolvedFunction
     $("input").change(saveForm);
     $("#btn-reset").click(function()
     {
@@ -102,6 +102,7 @@ function saveForm(notify = false)
     {
         if(notify === true)
         {
+            //noinspection JSUnresolvedFunction,JSUnresolvedVariable
             const message = chrome.i18n.getMessage("options_saved_successfully");
             Materialize.toast(message, 800);
         }
@@ -113,6 +114,7 @@ function replace_i18n(obj, tag)
 {
     const msg = tag.replace(/__MSG_(\w+)__/g, function(match, v1)
     {
+        //noinspection JSUnresolvedVariable,JSUnresolvedFunction
         return v1 ? chrome.i18n.getMessage(v1) : '';
     });
 
@@ -137,8 +139,8 @@ function localizeHtmlPage()
 
     for(let j = 0; j < page.length; j ++)
     {
-        obj = page[j];
-        tag = obj.innerHTML.toString();
+        const obj = page[j];
+        const tag = obj.innerHTML.toString();
 
         replace_i18n(obj, tag);
     }
