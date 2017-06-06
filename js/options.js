@@ -92,9 +92,9 @@ function saveForm(notify = false)
 {
     const settings = {};
 
-    let defaultWeight = $("#input-default-weight").val().replace(/[^\d]/g, "");
-    let plusWeight = $("#input-plus-weight").val().replace(/[^\d\.-]/g, "");
-    let minusWeight = $("#input-minus-weight").val().replace(/[^\d\.-]/g, "");
+    let defaultWeight = $("#input-default-weight").val().replace(/[^\d.-]/g, "");
+    let plusWeight = $("#input-plus-weight").val().replace(/[^\d.-]/g, "");
+    let minusWeight = $("#input-minus-weight").val().replace(/[^\d.-]/g, "");
     let policy = $("#checkbox-policy")[0].checked;
     let weights = $("#checkbox-weights")[0].checked;
 

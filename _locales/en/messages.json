@@ -24,7 +24,7 @@
         "message": "Minus fraction"
     },
     "options_policy_hint": {
-        "message": "Whether to take grades marked as 'Use toward the average' into account for the calculations"
+        "message": "Whether to take grades marked as 'Count toward the average' into account for the calculations"
     },
     "options_use_weights_hint": {
         "message": "This allows you to turn off the weights in the calculations"

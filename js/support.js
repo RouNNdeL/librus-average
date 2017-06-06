@@ -48,13 +48,13 @@ function loadSettings(callback)
             saveSettings(settings);
         }
 
-        if(settings.defaultWeight === null || settings.defaultWeight === undefined)
+        if(settings.defaultWeight === null || settings.defaultWeight === undefined || isNaN(settings.defaultWeight))
             settings.defaultWeight = DEFAULT_WEIGHT;
 
-        if(settings.plusWeight === null || settings.plusWeight === undefined)
+        if(settings.plusWeight === null || settings.plusWeight === undefined || isNaN(settings.plusWeight))
             settings.plusWeight = PLUS_WEIGHT;
 
-        if(settings.minusWeight === null || settings.minusWeight === undefined)
+        if(settings.minusWeight === null || settings.minusWeight === undefined || isNaN(settings.minusWeight))
             settings.minusWeight = MINUS_WEIGHT;
 
         if(settings.respectPolicy === null || settings.respectPolicy === undefined)
