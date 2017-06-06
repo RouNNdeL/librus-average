@@ -7,9 +7,9 @@ $(function()
 {
     loadSettings(function(settings)
     {
-        console.log(settings);
         setup(settings);
     });
+    registerOnChangedListener();
 });
 
 function Mark(mark, weight)
@@ -47,6 +47,19 @@ function MarkList(markList)
     {
         return new MarkList(this.markList.concat(list.markList));
     };
+}
+
+function registerOnChangedListener()
+{
+    //noinspection JSUnresolvedVariable
+    chrome.storage.onChanged.addListener(function(changes, namespace) {
+        for (let key in changes) {
+            if(key === SETTINGS)
+            {
+                setup(changes[SETTINGS]["newValue"])
+            }
+        }
+    });
 }
 
 /**
