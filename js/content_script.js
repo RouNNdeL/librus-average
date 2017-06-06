@@ -125,7 +125,7 @@ function getMarks(row, column, settings = DEFAULT_SETTINGS)
         let markMatch = rawMark.match(REGEX_MARK);
         let weightMatch = markDescription.match(REGEX_WEIGHT);
         let policyMatch = markDescription.match(REGEX_POLICY);
-        let weight = weightMatch !== null ? parseInt(weightMatch[1]) : settings.defaultWeight;
+        let weight = settings.useWeights ? weightMatch !== null ? parseInt(weightMatch[1]) : settings.defaultWeight : 1;
 
         let policy = policyMatch !== null ? policyMatch[1] : POLICY_POSITIVE;
 

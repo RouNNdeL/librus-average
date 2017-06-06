@@ -71,11 +71,15 @@ function loadForm(settings = DEFAULT_SETTINGS)
     const plusWeight = $("#input-plus-weight");
     const minusWeight = $("#input-minus-weight");
     const policy = $("#checkbox-policy");
+    const weights = $("#checkbox-weights");
 
     defaultWeight.val(settings.defaultWeight);
     plusWeight.val(settings.plusWeight);
     minusWeight.val(settings.minusWeight);
     policy.prop("checked", settings.respectPolicy);
+    weights.prop("checked", settings.useWeights);
+
+    console.log(settings);
 
     Materialize.updateTextFields();
 }
@@ -92,8 +96,7 @@ function saveForm(notify = false)
     let plusWeight = $("#input-plus-weight").val().replace(/[^\d\.-]/g, "");
     let minusWeight = $("#input-minus-weight").val().replace(/[^\d\.-]/g, "");
     let policy = $("#checkbox-policy")[0].checked;
-
-    console.log(policy);
+    let weights = $("#checkbox-weights")[0].checked;
 
     defaultWeight = parseInt(defaultWeight);
     plusWeight = parseFloat(plusWeight);
@@ -116,6 +119,7 @@ function saveForm(notify = false)
     settings.plusWeight = plusWeight;
     settings.minusWeight = minusWeight;
     settings.respectPolicy = policy;
+    settings.useWeights = weights;
 
     saveSettings(settings, function()
     {

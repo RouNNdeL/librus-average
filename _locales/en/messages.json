@@ -11,6 +11,9 @@
     "options_policy": {
         "message": "Respect grades' policy"
     },
+    "options_use_weights": {
+        "message": "Use weights"
+    },
     "options_default_weight": {
         "message": "Default weight"
     },
@@ -22,6 +25,9 @@
     },
     "options_policy_hint": {
         "message": "Whether to take grades marked as 'Use toward the average' into account for the calculations"
+    },
+    "options_use_weights_hint": {
+        "message": "This allows you to turn off the weights in the calculations"
     },
     "options_default_weight_hint": {
         "message": "Value used for weight in case the grade has no weight assigned, set to 0 to skip those grades"

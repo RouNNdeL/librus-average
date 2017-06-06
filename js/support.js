@@ -17,6 +17,7 @@ const PLUS_WEIGHT = 0.5;
 const MINUS_WEIGHT = 0.25;
 const DEFAULT_WEIGHT = 1;
 const RESPECT_POLICY = true;
+const USE_WEIGHTS = true;
 
 /**
  * This is an example of a settings object
@@ -26,7 +27,8 @@ const DEFAULT_SETTINGS = {
     plusWeight: PLUS_WEIGHT,
     minusWeight: MINUS_WEIGHT,
     defaultWeight: DEFAULT_WEIGHT,
-    respectPolicy: RESPECT_POLICY
+    respectPolicy: RESPECT_POLICY,
+    useWeights: USE_WEIGHTS
 };
 
 /**
@@ -45,6 +47,22 @@ function loadSettings(callback)
             settings = DEFAULT_SETTINGS;
             saveSettings(settings);
         }
+
+        if(settings.defaultWeight === null || settings.defaultWeight === undefined)
+            settings.defaultWeight = DEFAULT_WEIGHT;
+
+        if(settings.plusWeight === null || settings.plusWeight === undefined)
+            settings.plusWeight = PLUS_WEIGHT;
+
+        if(settings.minusWeight === null || settings.minusWeight === undefined)
+            settings.minusWeight = MINUS_WEIGHT;
+
+        if(settings.respectPolicy === null || settings.respectPolicy === undefined)
+            settings.respectPolicy = RESPECT_POLICY;
+
+        if(settings.useWeights === null || settings.useWeights === undefined)
+            settings.useWeights = USE_WEIGHTS;
+
         callback(settings);
     });
 }
