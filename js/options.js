@@ -13,6 +13,10 @@ $(function(e)
     refreshForm();
 });
 
+/**
+ * Refreshes the form with fresh values
+ * @see loadSettings()
+ */
 function refreshForm()
 {
     loadSettings(function(settings)
@@ -21,11 +25,14 @@ function refreshForm()
     });
 }
 
+/**
+ * Looks for every <code>.tooltipped</code> element, and replaces the <code>data-tooltip</code> with it's localized version
+ */
 function localizeHintData()
 {
     $(".tooltipped").each(function(i)
     {
-        const tag = $(this).attr("data-tooltip")
+        const tag = $(this).attr("data-tooltip");
         const msg = tag.replace(/__MSG_(\w+)__/g, function(match, v1)
         {
             return v1 ? chrome.i18n.getMessage(v1) : '';
@@ -34,6 +41,9 @@ function localizeHintData()
     })
 }
 
+/**
+ * Register onChange listeners to the form and onClick listeners to the buttons
+ */
 function registerListeners()
 {
     $("#btn-save").click(function()
@@ -50,7 +60,12 @@ function registerListeners()
     });
 }
 
-function loadForm(settings)
+/**
+ * Loads provided settings into the form
+ * @param {object} [settings = DEFAULT_SETTINGS] settings to load into the form
+ * @see DEFAULT_SETTINGS
+ */
+function loadForm(settings = DEFAULT_SETTINGS)
 {
     const defaultWeight = $("#input-default-weight");
     const plusWeight = $("#input-plus-weight");
@@ -65,6 +80,10 @@ function loadForm(settings)
     Materialize.updateTextFields();
 }
 
+/**
+ * Saves the form and shows a {@link Materialize.toast toast}
+ * @param {boolean} [notify = false] will show a {@link Materialize.toast toast} if <code>true</code>
+ */
 function saveForm(notify = false)
 {
     const settings = {};

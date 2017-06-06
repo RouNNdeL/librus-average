@@ -18,6 +18,10 @@ const MINUS_WEIGHT = 0.25;
 const DEFAULT_WEIGHT = 1;
 const RESPECT_POLICY = true;
 
+/**
+ * This is an example of a settings object
+ * @type {{plusWeight: number, minusWeight: number, defaultWeight: number, respectPolicy: boolean}}
+ */
 const DEFAULT_SETTINGS = {
     plusWeight: PLUS_WEIGHT,
     minusWeight: MINUS_WEIGHT,
@@ -25,7 +29,11 @@ const DEFAULT_SETTINGS = {
     respectPolicy: RESPECT_POLICY
 };
 
-
+/**
+ * Loads settings from Chrome's sync storage, if no settings are found returns default settings and saves them
+ * @param {function} callback function to receive the settings
+ * @see DEFAULT_SETTINGS
+ */
 function loadSettings(callback)
 {
     chrome.storage.sync.get(function(items)
@@ -40,6 +48,12 @@ function loadSettings(callback)
     });
 }
 
+/**
+ * Saves provided settings to Chrome's sync storage
+ * @param {object} settings to save
+ * @param {function} [callback] passed to {@link chrome.storage.sync.set()}
+ * @see DEFAULT_SETTINGS
+ */
 function saveSettings(settings, callback)
 {
     if(typeof callback === "function")
@@ -56,6 +70,11 @@ function saveSettings(settings, callback)
     }
 }
 
+/**
+ * Resets the settings to their default values
+ * @param {function} [callback] passed to {@link chrome.storage.sync.set()}
+ * @see DEFAULT_SETTINGS
+ */
 function clearSettings(callback)
 {
     if(typeof callback === "function")

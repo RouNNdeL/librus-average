@@ -25,6 +25,10 @@ function MarkList(markList)
     else
         this.markList = markList;
 
+    /**
+     * Calculates a weighted average of all {@link Mark Marks} in the markList
+     * @returns {number} weighted average
+     */
     this.getAverage = function()
     {
         let markSum = 0;
@@ -45,6 +49,13 @@ function MarkList(markList)
     };
 }
 
+/**
+ * This function allows a regex selector for jQuery
+ * @param elem
+ * @param index
+ * @param match
+ * @returns {boolean}
+ */
 jQuery.expr[':'].regex = function(elem, index, match)
 {
     const matchParams = match[3].split(','),
@@ -60,11 +71,19 @@ jQuery.expr[':'].regex = function(elem, index, match)
     return regex.test(jQuery(elem)[attr.method](attr.property));
 };
 
-function getMarks(row, column_no, settings)
+/**
+ * Used to grab marks from a single row and column in that row.
+ * @param {object} row an element that represents a single subject grabbed with jQuery from the subject table
+ * @param {number} column index of the column in said table
+ * @param {object} [settings = DEFAULT_SETTINGS] used to check for the weights, and the policy
+ * @returns {MarkList} for a single subject in a single school term
+ * @see DEFAULT_SETTINGS
+ */
+function getMarks(row, column, settings = DEFAULT_SETTINGS)
 {
     let marks = new MarkList();
 
-    $(row).find("td").eq(column_no).find("span.grade-box  a").each(function(i)
+    $(row).find("td").eq(column).find("span.grade-box  a").each(function(i)
     {
         let rawMark = $(this).text();
         let markDescription = $(this).attr("title");
@@ -89,7 +108,14 @@ function getMarks(row, column_no, settings)
     return marks;
 }
 
-function setup(settings)
+/**
+ * Performs the whole setup. Using a selector goes through every single row and using {@link getMarks}
+ * receives 2 {@link MarkList MarksLists} for both terms and then displays the average
+ * calculated by {@link MarkList.getAverage} in the corresponding columns
+ * @param {object} [settings = DEFAULT_SETTINGS] settings that are going to be used in the setup
+ * @see DEFAULT_SETTINGS
+ */
+function setup(settings = DEFAULT_SETTINGS)
 {
     //Those are rows corresponding to a subject
     //noinspection CssInvalidPseudoSelector
