@@ -81,25 +81,45 @@ function loadForm(settings = DEFAULT_SETTINGS)
 }
 
 /**
- * Saves the form and shows a {@link Materialize.toast toast}
+ * Validates and saves the form and shows a {@link Materialize.toast toast}
  * @param {boolean} [notify = false] will show a {@link Materialize.toast toast} if <code>true</code>
  */
 function saveForm(notify = false)
 {
     const settings = {};
 
-    const defaultWeight = $("#input-default-weight");
-    const plusWeight = $("#input-plus-weight");
-    const minusWeight = $("#input-minus-weight");
-    const policy = $("#checkbox-policy");
+    let defaultWeight = $("#input-default-weight").val().replace(/[^\d]/g, "");
+    let plusWeight = $("#input-plus-weight").val().replace(/[^\d\.-]/g, "");
+    let minusWeight = $("#input-minus-weight").val().replace(/[^\d\.-]/g, "");
+    let policy = $("#checkbox-policy")[0].checked;
 
-    settings.defaultWeight = parseInt(defaultWeight.val());
-    settings.plusWeight = parseFloat(plusWeight.val());
-    settings.minusWeight = parseFloat(minusWeight.val());
-    settings.respectPolicy = policy.val() === "on";
+    console.log(policy);
+
+    defaultWeight = parseInt(defaultWeight);
+    plusWeight = parseFloat(plusWeight);
+    minusWeight = parseFloat(minusWeight);
+
+    if(defaultWeight < 0)
+        defaultWeight = 0;
+
+    if(plusWeight > 1)
+        plusWeight = 1;
+    if(plusWeight < 0)
+        plusWeight = 0;
+
+    if(minusWeight > 1)
+        minusWeight = 1;
+    if(minusWeight < 0)
+        minusWeight = 0;
+
+    settings.defaultWeight = defaultWeight;
+    settings.plusWeight = plusWeight;
+    settings.minusWeight = minusWeight;
+    settings.respectPolicy = policy;
 
     saveSettings(settings, function()
     {
+        refreshForm();
         if(notify === true)
         {
             //noinspection JSUnresolvedFunction,JSUnresolvedVariable
