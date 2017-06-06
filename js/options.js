@@ -60,6 +60,28 @@ function registerListeners()
     });
 }
 
+//This has been replaced with standard HTML (min, max, step) attributes for input with type number
+/*function onArrowPress(event)
+{
+    let change = event.which == 38 ? 0.05 : event.which === 40 ? - 0.05 : 0;
+    const focused = $("#input-plus-weight:focus,#input-minus-weight:focus");
+    if(focused.length === 1 && change !== 0)
+    {
+        //e.preventDefault();
+
+        let val = parseFloat(focused.val().replace(/[^\d.-]/g, ""));
+        val = Math.round((val+change) * 100) / 100;
+
+        if(val > 1)
+            val = 1;
+        if(val < 0)
+            val = 0;
+
+        focused.val(val);
+        saveForm();
+    }
+}*/
+
 /**
  * Loads provided settings into the form
  * @param {object} [settings = DEFAULT_SETTINGS] settings to load into the form
@@ -78,8 +100,6 @@ function loadForm(settings = DEFAULT_SETTINGS)
     minusWeight.val(settings.minusWeight);
     policy.prop("checked", settings.respectPolicy);
     weights.prop("checked", settings.useWeights);
-
-    console.log(settings);
 
     Materialize.updateTextFields();
 }
