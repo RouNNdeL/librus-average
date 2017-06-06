@@ -8,15 +8,20 @@ const PLUS_REGEX = /!plus_weight!/;
 $(function(e)
 {
     localizeHtmlPage();
+    localizeHintData();
+    registerListeners();
+    refreshForm();
+});
+
+function refreshForm()
+{
     loadSettings(function(settings)
     {
         loadForm(settings);
-        registerOnChangeListener();
-        loadHintData();
     });
-});
+}
 
-function loadHintData()
+function localizeHintData()
 {
     $(".tooltipped").each(function(i)
     {
@@ -29,13 +34,20 @@ function loadHintData()
     })
 }
 
-function registerOnChangeListener()
+function registerListeners()
 {
     $("#btn-save").click(function()
     {
         saveForm(true)
     });
     $("input").change(saveForm);
+    $("#btn-reset").click(function()
+    {
+        clearSettings(function()
+        {
+            refreshForm();
+        })
+    });
 }
 
 function loadForm(settings)
@@ -49,6 +61,8 @@ function loadForm(settings)
     plusWeight.val(settings.plusWeight);
     minusWeight.val(settings.minusWeight);
     policy.prop("checked", settings.respectPolicy);
+
+    Materialize.updateTextFields();
 }
 
 function saveForm(notify = false)
@@ -63,16 +77,14 @@ function saveForm(notify = false)
     settings.defaultWeight = parseInt(defaultWeight.val());
     settings.plusWeight = parseFloat(plusWeight.val());
     settings.minusWeight = parseFloat(minusWeight.val());
-    settings.respectPolicy = policy.val() === "true";
-
-    console.log(settings);
+    settings.respectPolicy = policy.val() === "on";
 
     saveSettings(settings, function()
     {
         if(notify === true)
         {
             const message = chrome.i18n.getMessage("options_saved_successfully");
-            Materialize.toast(message, 1000);
+            Materialize.toast(message, 800);
         }
     });
 }

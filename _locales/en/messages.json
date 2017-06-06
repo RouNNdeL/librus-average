@@ -32,11 +32,14 @@
     "options_minus_weight_hint": {
         "message": "The fraction that's going to be subtracted from a grade with a minus"
     },
+    "options_save": {
+        "message": "Save"
+    },
     "options_saved_successfully": {
-        "message": "Saved successfully"
+        "message": "Saved successfully!"
     },
     "options_save_failure": {
-        "message": "Failed to save: !error!"
+        "message": "Failed to save!"
     },
     "options_reset_defaults": {
         "message": "Reset to defaults"

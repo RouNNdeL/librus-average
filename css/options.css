@@ -41,3 +41,50 @@ body
     height: 24px;
     padding-left: 16px;
 }
+
+.hint
+{
+    cursor: help;
+}
+
+.cursor-default
+{
+    cursor: default;
+}
+
+.cursor-pointer
+{
+    cursor: pointer;
+}
+/* Rules for using icons as black on a light background. */
+.material-icons.md-dark
+{
+    color: rgba(0, 0, 0, 0.54);
+}
+
+.material-icons.md-dark.md-inactive
+{
+    color: rgba(0, 0, 0, 0.26);
+}
+
+/* Rules for using icons as white on a dark background. */
+.material-icons.md-light
+{
+    color: rgba(255, 255, 255, 1);
+}
+
+.material-icons.md-light.md-inactive
+{
+    color: rgba(255, 255, 255, 0.3);
+}
+
+#toast-container
+{
+    top: 0 !important;
+    right: auto;
+!important;
+    bottom: auto;
+!important;
+    left: auto;
+!important;
+}

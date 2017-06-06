@@ -17,12 +17,22 @@
 
 <div>
     <div class="filling-container">
+        <div class="filling-div">
+            <h5 data-localize="__MSG_options_title__">Extension Settings</h5>
+        </div>
+        <div class="static-div">
+            <i id="btn-reset" class="material-icons md-dark center-vertically tooltipped cursor-pointer" data-position="bottom"
+               data-delay="50" data-tooltip="__MSG_options_reset_defaults__">settings_backup_restore</i>
+        </div>
+    </div>
+    <br>
+    <div class="filling-container">
         <div class="input-field filling-div">
             <input type="number" id="input-default-weight" min="0">
             <label data-localize="__MSG_options_default_weight__" for="input-default-weight">Default weight</label>
         </div>
         <div class="static-div">
-            <i class="material-icons center-vertically tooltipped" data-position="top" data-delay="50"
+            <i class="material-icons md-dark center-vertically tooltipped hint" data-position="top" data-delay="50"
                data-tooltip="__MSG_options_default_weight_hint__">info_outline</i>
         </div>
     </div>
@@ -33,7 +43,7 @@
             <label data-localize="__MSG_options_plus_weight__" for="input-plus-weight">Plus fraction</label>
         </div>
         <div class="static-div">
-            <i class="material-icons center-vertically tooltipped" data-position="top" data-delay="50"
+            <i class="material-icons md-dark center-vertically tooltipped hint" data-position="top" data-delay="50"
                data-tooltip="__MSG_options_plus_weight_hint__">info_outline</i>
         </div>
     </div>
@@ -44,7 +54,7 @@
             <label data-localize="__MSG_options_minus_weight__" for="input-minus-weight">Minus fraction</label>
         </div>
         <div class="static-div">
-            <i class="material-icons center-vertically tooltipped" data-position="top" data-delay="50"
+            <i class="material-icons md-dark center-vertically tooltipped hint" data-position="top" data-delay="50"
                data-tooltip="__MSG_options_minus_weight_hint__">info_outline</i>
         </div>
     </div>
@@ -55,13 +65,13 @@
             <label data-localize="__MSG_options_policy__" for="checkbox-policy">Respect grades' policy</label>
         </div>
         <div class="static-div">
-            <i class="material-icons center-vertically tooltipped" data-position="top" data-delay="50"
+            <i class="material-icons md-dark center-vertically tooltipped hint" data-position="top" data-delay="50"
                data-tooltip="__MSG_options_policy_hint__">info_outline</i>
         </div>
     </div>
 
     <br>
-    <a class="btn center-horizontally" id="btn-save">Save</a>
+    <a class="btn center-horizontally" id="btn-save" data-localize="__MSG_options_save__">Save</a>
 
 </div>
 
