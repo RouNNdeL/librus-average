@@ -1,0 +1,43 @@
+body
+{
+    width: 300px;
+    height: auto;
+    padding: 24px 24px 24px 24px;
+}
+
+.filling-container
+{
+    display: flex;
+}
+
+.static-div
+{
+    display: inline-flex;
+}
+
+.filling-div
+{
+    display: inline-flex;
+    flex-grow: 100;
+}
+
+.center-vertically
+{
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.center-horizontally
+{
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.material-icons
+{
+    width: 24px;
+    height: 24px;
+    padding-left: 16px;
+}

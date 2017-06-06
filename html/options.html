@@ -2,9 +2,68 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Extension Options</title>
+    <title data-localize="__MSG_options_title__">Extension Options</title>
+
+    <link rel="stylesheet" href="/materialize/css/materialize.min.css">
+    <link rel="stylesheet" href="/css/options.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <script src="/js/support.js"></script>
+    <script src="/js/options.js"></script>
+    <script src="/materialize/js/materialize.min.js"></script>
 </head>
 <body>
+
+<div>
+    <div class="filling-container">
+        <div class="input-field filling-div">
+            <input type="number" id="input-default-weight" min="0">
+            <label data-localize="__MSG_options_default_weight__" for="input-default-weight">Default weight</label>
+        </div>
+        <div class="static-div">
+            <i class="material-icons center-vertically tooltipped" data-position="top" data-delay="50"
+               data-tooltip="__MSG_options_default_weight_hint__">info_outline</i>
+        </div>
+    </div>
+
+    <div class="filling-container">
+        <div class="input-field filling-div">
+            <input type="text" id="input-plus-weight">
+            <label data-localize="__MSG_options_plus_weight__" for="input-plus-weight">Plus fraction</label>
+        </div>
+        <div class="static-div">
+            <i class="material-icons center-vertically tooltipped" data-position="top" data-delay="50"
+               data-tooltip="__MSG_options_plus_weight_hint__">info_outline</i>
+        </div>
+    </div>
+
+    <div class="filling-container">
+        <div class="input-field filling-div">
+            <input type="text" id="input-minus-weight">
+            <label data-localize="__MSG_options_minus_weight__" for="input-minus-weight">Minus fraction</label>
+        </div>
+        <div class="static-div">
+            <i class="material-icons center-vertically tooltipped" data-position="top" data-delay="50"
+               data-tooltip="__MSG_options_minus_weight_hint__">info_outline</i>
+        </div>
+    </div>
+
+    <div class="filling-container">
+        <div class="input-field filling-div" style="transform: translateY(-16px);">
+            <input class="filled-in" type="checkbox" id="checkbox-policy">
+            <label data-localize="__MSG_options_policy__" for="checkbox-policy">Respect grades' policy</label>
+        </div>
+        <div class="static-div">
+            <i class="material-icons center-vertically tooltipped" data-position="top" data-delay="50"
+               data-tooltip="__MSG_options_policy_hint__">info_outline</i>
+        </div>
+    </div>
+
+    <br>
+    <a class="btn center-horizontally" id="btn-save">Save</a>
+
+</div>
 
 </body>
 </html>

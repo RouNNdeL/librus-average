@@ -1,0 +1,44 @@
+{
+    "app_name": {
+        "message": "Średnia do Librusa"
+    },
+    "app_description": {
+        "message": "To rozszerzenie liczy średnią towich ocen w systemie Librus Syngergia"
+    },
+    "options_title": {
+        "message": "Ustawienia"
+    },
+    "options_policy": {
+        "message": "Respetkuj Librusa"
+    },
+    "options_default_weight": {
+        "message": "Domyślna waga"
+    },
+    "options_plus_weight": {
+        "message": "Wartość plusa"
+    },
+    "options_minus_weight": {
+        "message": "Wartość minusa"
+    },
+    "options_policy_hint": {
+        "message": "Respektuj oznaczenie 'Licz do średniej'"
+    },
+    "options_default_weight_hint": {
+        "message": "Domyślna waga w przypadku jej braku, wpisz 0 by nie brać tych ocen pod uwagę"
+    },
+    "options_plus_weight_hint": {
+        "message": "Ułamek dodawany do oceny z plusem"
+    },
+    "options_minus_weight_hint": {
+        "message": "Ułamek odejmowany od oceny z minusem"
+    },
+    "options_saved_successfully": {
+        "message": "Zapisano pomyślnie"
+    },
+    "options_save_failure": {
+        "message": "Wystąpił problem podczas zapisu: !error!"
+    },
+    "options_reset_defaults": {
+        "message": "Przywróć ustawienia domyślne"
+    }
+}
