@@ -3,10 +3,13 @@
  */
 'use strict';
 
+let columnNumbers = DEFAULT_COLUMN_NUMBERS;
+
 $(function()
 {
     loadSettings(function(settings)
     {
+        columnNumbers = getColumnNumbers();
         setup(settings);
     });
     registerOnChangedListener();
@@ -66,6 +69,7 @@ function MarkList(markList)
     };
 }
 
+//noinspection JSValidateJSDoc
 /**
  * Registers a {@link  chrome.storage.onChanged} listener to update the averages when the settings change
  */
@@ -105,6 +109,61 @@ jQuery.expr[':'].regex = function(elem, index, match)
 
     return regex.test(jQuery(elem)[attr.method](attr.property));
 };
+
+/**
+ * Convenient function to check whether certain params match a given regex
+ * @param {object} column
+ * @param {RegExp} regex
+ * @returns {boolean} true if matches
+ */
+function columnMatches(column, regex)
+{
+    return regex.exec(column.text()) !== null ||
+        regex.exec(column.attr("title")) !== null;
+}
+
+/**
+ * Dynamically fetches column numbers for required fields
+ * @returns {{firstTermMarks: number, firstTermAverage: number, secondTermMarks: number, secondTermAverage: number, yearAverage: number}}
+ * @see DEFAULT_COLUMN_NUMBERS
+ */
+function getColumnNumbers()
+{
+    const columns = $("table.decorated.stretch").find("thead")
+        .find("tr").eq(1).find("td");
+    const columnNumbers = {};
+    columns.each(function(i)
+    {
+        const offsetColumnNumber = i + THEAD_COLUMN_OFFSET;
+        if(columnMatches($(this), REGEX_FIRST_TERM_MARKS) &&
+            columnNumbers.firstTermMarks === undefined)
+        {
+            columnNumbers.firstTermMarks = offsetColumnNumber;
+        }
+        else if(columnMatches($(this), REGEX_FIRST_TERM_AVERAGE) &&
+            columnNumbers.firstTermAverage === undefined)
+        {
+            columnNumbers.firstTermAverage = offsetColumnNumber;
+        }
+        else if(columnMatches($(this), REGEX_SECOND_TERM_MARKS) &&
+            columnNumbers.secondTermMarks === undefined)
+        {
+            columnNumbers.secondTermMarks = offsetColumnNumber;
+        }
+        else if(columnMatches($(this), REGEX_SECOND_TERM_AVERAGE) &&
+            columnNumbers.secondTermAverage === undefined)
+        {
+            columnNumbers.secondTermAverage = offsetColumnNumber;
+        }
+        else if(columnMatches($(this), REGEX_YEAR_AVERAGE) &&
+            columnNumbers.yearAverage === undefined)
+        {
+            columnNumbers.yearAverage = offsetColumnNumber;
+        }
+    });
+
+    return columnNumbers;
+}
 
 /**
  * Used to grab marks from a single row and column in that row.
@@ -158,11 +217,11 @@ function setup(settings = DEFAULT_SETTINGS)
         .not("tr:regex(name, przedmioty_all)")
         .each(function()
         {
-            let firstTermMarks = getMarks(this, FIRST_TERM_INDEX, settings);
-            let secondTermMarks = getMarks(this, SECOND_TERM_INDEX, settings);
+            let firstTermMarks = getMarks(this, columnNumbers.firstTermMarks, settings);
+            let secondTermMarks = getMarks(this, columnNumbers.secondTermMarks, settings);
             let yearMarks = firstTermMarks.concat(secondTermMarks);
 
-            const firstTermCell = $(this).find("td").eq(FIRST_TERM_AVG);
+            const firstTermCell = $(this).find("td").eq(columnNumbers.firstTermAverage);
             //Required, as Librus forgot to add that class for this cell
             firstTermCell.addClass("center");
             if(firstTermMarks.getAverage() > 0)
@@ -170,7 +229,7 @@ function setup(settings = DEFAULT_SETTINGS)
             else
                 firstTermCell.text("-");
 
-            const secondTermCell = $(this).find("td").eq(SECOND_TERM_AVG);
+            const secondTermCell = $(this).find("td").eq(columnNumbers.secondTermAverage);
             //Not required, but we'll add the class just in case
             secondTermCell.addClass("center");
             if(secondTermMarks.getAverage() > 0)
@@ -178,7 +237,7 @@ function setup(settings = DEFAULT_SETTINGS)
             else
                 secondTermCell.text("-");
 
-            const yearCell = $(this).find("td").eq(YEAR_AVG);
+            const yearCell = $(this).find("td").eq(columnNumbers.yearAverage);
             //Not required, but we'll add the class just in case
             yearCell.addClass("center");
             if(yearMarks.getAverage() > 0)

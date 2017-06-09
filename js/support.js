@@ -4,13 +4,27 @@ const REGEX_WEIGHT = /Waga: (\d+)/;
 const REGEX_MARK = /(\d)([+-]?)/;
 const REGEX_POLICY = /Licz do średniej:\s*(tak|nie)/;
 
+const REGEX_FIRST_TERM_MARKS = /Oceny bieżące/;
+const REGEX_FIRST_TERM_AVERAGE = /ocen.*pierwszego okresu/i;
+const REGEX_SECOND_TERM_MARKS = /Oceny bieżące/;
+const REGEX_SECOND_TERM_AVERAGE = /ocen.*drugiego okresu/i;
+const REGEX_YEAR_AVERAGE = /średnia roczna/i;
+
 const POLICY_POSITIVE = "tak";
 
-const FIRST_TERM_INDEX = 2;
-const FIRST_TERM_AVG = 3;
-const SECOND_TERM_INDEX = 6;
-const SECOND_TERM_AVG = 7;
-const YEAR_AVG = 9;
+/**
+ * Librus sometimes hides unnecessary columns, so we need to dynamically check what they are
+ * @type {{firstTermMarks: number, firstTermAverage: number, secondTermMarks: number, secondTermAverage: number, yearAverage: number}}
+ */
+const DEFAULT_COLUMN_NUMBERS = {
+    firstTermMarks: 2,
+    firstTermAverage: 3,
+    secondTermMarks: 6,
+    secondTermAverage: 7,
+    yearAverage: 9,
+};
+
+THEAD_COLUMN_OFFSET = 2; //The columns in the head row are offset by 2 compared to the subject rows
 
 //Default Settings
 const PLUS_WEIGHT = 0.5;
