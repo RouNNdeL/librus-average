@@ -70,13 +70,12 @@ function MarkList(markList)
     };
 }
 
-//noinspection JSValidateJSDoc
 /**
  * Registers a {@link  chrome.storage.onChanged} listener to update the averages when the settings change
  */
 function registerOnChangedListener()
 {
-    //noinspection JSUnresolvedVariable,JSUnusedLocalSymbols
+    //noinspection JSUnusedLocalSymbols
     chrome.storage.onChanged.addListener(function(changes, namespace)
     {
         for(let key in changes)
@@ -213,7 +212,7 @@ function getMarks(row, column, settings = DEFAULT_SETTINGS)
 function setup(settings = DEFAULT_SETTINGS)
 {
     //Those are rows corresponding to a subject
-    //noinspection CssInvalidPseudoSelector
+    //noinspection CssInvalidPseudoSelector, UnexpectedToken
     $("table.decorated.stretch tbody tr:regex(class, line[0,1])")
         .not("tr:regex(name, przedmioty_all)")
         .each(function()
@@ -256,12 +255,10 @@ function sendAnalyticsEvent(com, data = {}, responseCallback = null)
 
     if(typeof responseCallback === "function")
     {
-        //noinspection JSUnresolvedFunction,JSUnresolvedVariable
         chrome.runtime.sendMessage(request, responseCallback);
     }
     else
     {
-        //noinspection JSUnresolvedFunction,JSUnresolvedVariable
         chrome.runtime.sendMessage(request);
     }
 }

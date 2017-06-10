@@ -6,9 +6,9 @@ const REGEX_WEIGHT = /Waga: (\d+)/;
 const REGEX_MARK = /(\d)([+-]?)/;
 const REGEX_POLICY = /Licz do średniej:\s*(tak|nie)/;
 
-const REGEX_FIRST_TERM_MARKS = /Oceny bieżące/;
+const REGEX_FIRST_TERM_MARKS = /Oceny bieżące/i;
 const REGEX_FIRST_TERM_AVERAGE = /ocen.*pierwszego okresu/i;
-const REGEX_SECOND_TERM_MARKS = /Oceny bieżące/;
+const REGEX_SECOND_TERM_MARKS = /Oceny bieżące/i;
 const REGEX_SECOND_TERM_AVERAGE = /ocen.*drugiego okresu/i;
 const REGEX_YEAR_AVERAGE = /średnia roczna/i;
 
@@ -59,7 +59,6 @@ const CONTENT_SCRIPT_LOADED = "CONTENT_SCRIPT_LOADED";
  */
 function loadSettings(callback)
 {
-    //noinspection JSUnresolvedVariable
     chrome.storage.sync.get(function(items)
     {
         let settings = items[SETTINGS];
@@ -100,14 +99,12 @@ function saveSettings(settings, callback)
     {
         const obj = {};
         obj[SETTINGS] = settings;
-        //noinspection JSUnresolvedVariable
         chrome.storage.sync.set(obj, callback);
     }
     else
     {
         const obj = {};
         obj[SETTINGS] = settings;
-        //noinspection JSUnresolvedVariable
         chrome.storage.sync.set(obj);
     }
 }
@@ -123,14 +120,12 @@ function clearSettings(callback)
     {
         const obj = {};
         obj[SETTINGS] = DEFAULT_SETTINGS;
-        //noinspection JSUnresolvedVariable
         chrome.storage.sync.set(obj, callback);
     }
     else
     {
         const obj = {};
         obj[SETTINGS] = DEFAULT_SETTINGS;
-        //noinspection JSUnresolvedVariable
         chrome.storage.sync.set(obj);
     }
 }

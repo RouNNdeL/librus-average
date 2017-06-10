@@ -20,7 +20,6 @@ function onMessageListener(request, sender, sendResponse)
     }
 }
 
-//noinspection JSUnresolvedVariable
 chrome.runtime.onMessage.addListener(onMessageListener);
 
 loadAnalytics(DEBUG_MODE);

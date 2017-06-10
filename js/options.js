@@ -36,7 +36,6 @@ function localizeHintData()
         const tag = $(this).attr("data-tooltip");
         const msg = tag.replace(/__MSG_(\w+)__/g, function(match, v1)
         {
-            //noinspection JSUnresolvedVariable,JSUnresolvedFunction
             return v1 ? chrome.i18n.getMessage(v1) : '';
         });
         $(this).attr("data-tooltip", msg);
@@ -58,7 +57,7 @@ function registerListeners()
             eventLabel: 'Save button click'
         });
     });
-    //noinspection JSUnresolvedFunction
+
     $("input").change(function(e)
     {
         saveForm();
@@ -69,6 +68,7 @@ function registerListeners()
             eventLabel: $(e.target).attr("id")
         });
     });
+
     $("#btn-reset").click(function()
     {
         clearSettings(function()
@@ -194,7 +194,6 @@ function saveForm(notify = false)
         refreshForm();
         if(notify === true)
         {
-            //noinspection JSUnresolvedFunction,JSUnresolvedVariable
             const message = chrome.i18n.getMessage("options_saved_successfully");
             Materialize.toast(message, 800);
         }
@@ -206,11 +205,11 @@ function replace_i18n(obj, tag)
 {
     const msg = tag.replace(/__MSG_(\w+)__/g, function(match, v1)
     {
-        //noinspection JSUnresolvedVariable,JSUnresolvedFunction
         return v1 ? chrome.i18n.getMessage(v1) : '';
     });
 
-    if(msg != tag) obj.innerHTML = msg;
+    if(msg !== tag)
+        obj.innerHTML = msg;
 }
 
 function localizeHtmlPage()
