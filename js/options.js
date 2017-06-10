@@ -2,11 +2,12 @@
  * Created by Krzysiek on 06/06/2017.
  */
 
+loadAnalytics(true);
 
 $(function()
 {
-    //ga('set', 'sendHitTask', null);
-    ga('set', 'checkProtocolTask', function(){ /* nothing */ });
+    ga('send', 'pageview');
+
     localizeHtmlPage();
     localizeHintData();
     registerListeners();
@@ -56,7 +57,6 @@ function registerListeners()
             eventAction: 'saveForm',
             eventLabel: 'Save button click'
         });
-        console.log(ga.q);
     });
     //noinspection JSUnresolvedFunction
     $("input").change(function(e)
@@ -82,29 +82,53 @@ function registerListeners()
             eventLabel: 'Reset button click'
         });
     });
+    let target;
+    let t0;
+    $(".tooltipped").hover(function(e)
+    {
+        target = e.target;
+        t0 = new Date().getTime();
+    }, function(e)
+    {
+        if(e.target === target)
+        {
+            let t1 = new Date().getTime();
+            let dt = t1 - t0;
+            if(dt >= 225)
+            {
+                ga('send', {
+                    hitType: 'event',
+                    eventCategory: 'Hints',
+                    eventAction: 'viewHint',
+                    eventLabel: $(e.target).attr("id"),
+                    eventValue: dt
+                });
+            }
+        }
+    });
 }
 
 //This has been replaced with standard HTML (min, max, step) attributes for input with type number
 /*function onArrowPress(event)
-{
-    let change = event.which == 38 ? 0.05 : event.which === 40 ? - 0.05 : 0;
-    const focused = $("#input-plus-weight:focus,#input-minus-weight:focus");
-    if(focused.length === 1 && change !== 0)
-    {
-        //e.preventDefault();
+ {
+ let change = event.which == 38 ? 0.05 : event.which === 40 ? - 0.05 : 0;
+ const focused = $("#input-plus-weight:focus,#input-minus-weight:focus");
+ if(focused.length === 1 && change !== 0)
+ {
+ //e.preventDefault();
 
-        let val = parseFloat(focused.val().replace(/[^\d.-]/g, ""));
-        val = Math.round((val+change) * 100) / 100;
+ let val = parseFloat(focused.val().replace(/[^\d.-]/g, ""));
+ val = Math.round((val+change) * 100) / 100;
 
-        if(val > 1)
-            val = 1;
-        if(val < 0)
-            val = 0;
+ if(val > 1)
+ val = 1;
+ if(val < 0)
+ val = 0;
 
-        focused.val(val);
-        saveForm();
-    }
-}*/
+ focused.val(val);
+ saveForm();
+ }
+ }*/
 
 /**
  * Loads provided settings into the form
@@ -205,7 +229,7 @@ function localizeHtmlPage()
     // Localize everything else by replacing all __MSG_***__ tags
     const page = document.getElementsByTagName('html');
 
-    for(let j = 0; j < page.length; j ++)
+    for(let j = 0; j < page.length; j++)
     {
         const obj = page[j];
         const tag = obj.innerHTML.toString();
