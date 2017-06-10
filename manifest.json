@@ -24,5 +24,6 @@
         "storage",
         "https://synergia.librus.pl/",
         "https://fonts.googleapis.com/"
-    ]
+    ],
+    "content_security_policy": "script-src 'self' https://ssl.google-analytics.com 'sha256-vImJY5MKI57MqhRqWj1/T8zILBvEBTsPGcFwNwgTUtI=' https://www.google-analytics.com; object-src 'self'"
 }

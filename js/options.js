@@ -5,6 +5,8 @@
 
 $(function()
 {
+    //ga('set', 'sendHitTask', null);
+    ga('set', 'checkProtocolTask', function(){ /* nothing */ });
     localizeHtmlPage();
     localizeHintData();
     registerListeners();
@@ -47,16 +49,38 @@ function registerListeners()
 {
     $("#btn-save").click(function()
     {
-        saveForm(true)
+        saveForm(true);
+        ga('send', {
+            hitType: 'event',
+            eventCategory: 'Buttons',
+            eventAction: 'saveForm',
+            eventLabel: 'Save button click'
+        });
+        console.log(ga.q);
     });
     //noinspection JSUnresolvedFunction
-    $("input").change(saveForm);
+    $("input").change(function(e)
+    {
+        saveForm();
+        ga('send', {
+            hitType: 'event',
+            eventCategory: 'Inputs',
+            eventAction: 'changeValue',
+            eventLabel: $(e.target).attr("id")
+        });
+    });
     $("#btn-reset").click(function()
     {
         clearSettings(function()
         {
             refreshForm();
-        })
+        });
+        ga('send', {
+            hitType: 'event',
+            eventCategory: 'Buttons',
+            eventAction: 'resetForm',
+            eventLabel: 'Reset button click'
+        });
     });
 }
 
