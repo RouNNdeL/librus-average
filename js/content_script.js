@@ -13,6 +13,7 @@ $(function()
         setup(settings);
     });
     registerOnChangedListener();
+    sendAnalyticsEvent(CONTENT_SCRIPT_LOADED);
 });
 
 /**
@@ -49,7 +50,7 @@ function MarkList(markList)
         let markSum = 0;
         let weightSum = 0;
 
-        for(let i = 0; i < this.markList.length; i ++)
+        for(let i = 0; i < this.markList.length; i++)
         {
             markSum += this.markList[i].mark * this.markList[i].weight;
             weightSum += this.markList[i].weight;
@@ -75,7 +76,7 @@ function MarkList(markList)
  */
 function registerOnChangedListener()
 {
-    //noinspection JSUnresolvedVariable
+    //noinspection JSUnresolvedVariable,JSUnusedLocalSymbols
     chrome.storage.onChanged.addListener(function(changes, namespace)
     {
         for(let key in changes)
@@ -188,7 +189,7 @@ function getMarks(row, column, settings = DEFAULT_SETTINGS)
 
         let policy = policyMatch !== null ? policyMatch[1] : POLICY_POSITIVE;
 
-        if(markMatch !== null && (! settings.respectPolicy || policy === POLICY_POSITIVE))
+        if(markMatch !== null && (!settings.respectPolicy || policy === POLICY_POSITIVE))
         {
             let mark = parseInt(markMatch[1]);
             if(markMatch[2] === "+")
@@ -245,4 +246,22 @@ function setup(settings = DEFAULT_SETTINGS)
             else
                 yearCell.text("-");
         });
+}
+
+function sendAnalyticsEvent(com, data = {}, responseCallback = null)
+{
+    const request = {};
+    request[MSG_COM] = com;
+    request[MSG_DATA] = data;
+
+    if(typeof responseCallback === "function")
+    {
+        //noinspection JSUnresolvedFunction,JSUnresolvedVariable
+        chrome.runtime.sendMessage(request, responseCallback);
+    }
+    else
+    {
+        //noinspection JSUnresolvedFunction,JSUnresolvedVariable
+        chrome.runtime.sendMessage(request);
+    }
 }

@@ -2,7 +2,7 @@
  * Created by Krzysiek on 06/06/2017.
  */
 
-loadAnalytics(true);
+loadAnalytics(DEBUG_MODE);
 
 $(function()
 {

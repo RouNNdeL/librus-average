@@ -1,3 +1,5 @@
+const DEBUG_MODE = true;
+
 const SETTINGS = "settings";
 
 const REGEX_WEIGHT = /Waga: (\d+)/;
@@ -44,6 +46,11 @@ const DEFAULT_SETTINGS = {
     respectPolicy: RESPECT_POLICY,
     useWeights: USE_WEIGHTS
 };
+
+//Messaging constants
+const MSG_COM = "com";
+const MSG_DATA = "data";
+const CONTENT_SCRIPT_LOADED = "CONTENT_SCRIPT_LOADED";
 
 /**
  * Loads settings from Chrome's sync storage, if no settings are found returns default settings and saves them
