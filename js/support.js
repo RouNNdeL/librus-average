@@ -37,7 +37,12 @@ const USE_WEIGHTS = true;
 
 /**
  * This is an example of a settings object
- * @type {{plusWeight: number, minusWeight: number, defaultWeight: number, respectPolicy: boolean}}
+ * @typedef {Object}
+ * @property {number} plusWeight the fraction that will be added to a grade with a plus
+ * @property {number} minusWeight the fraction that will be subtracted from a grade with a minus
+ * @property {number} defaultWeight weight that will be assigned to a grade with no weight
+ * @property {boolean} respectPolicy whether to count grades marked as 'Do not count toward the average'
+ * @property {boolean} useWeights whether to use weights at all
  */
 const DEFAULT_SETTINGS = {
     plusWeight: PLUS_WEIGHT,

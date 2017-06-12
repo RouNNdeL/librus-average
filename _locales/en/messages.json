@@ -18,13 +18,13 @@
         "message": "Default weight"
     },
     "options_plus_weight": {
-        "message": "Plus fraction"
+        "message": "Positive fraction"
     },
     "options_minus_weight": {
-        "message": "Minus fraction"
+        "message": "Negative fraction"
     },
     "options_policy_hint": {
-        "message": "Whether to take grades marked as 'Count toward the average' into account for the calculations"
+        "message": "Whether to take grades marked as 'Do not count towards the average' into account for the calculations"
     },
     "options_use_weights_hint": {
         "message": "This allows you to turn off the weights in the calculations"
@@ -33,10 +33,10 @@
         "message": "Value used for weight in case the grade has no weight assigned, set to 0 to skip those grades"
     },
     "options_plus_weight_hint": {
-        "message": "The fraction that's going to be added to a grade with a plus"
+        "message": "The fraction that's going to be added to a grade with a plus (+)"
     },
     "options_minus_weight_hint": {
-        "message": "The fraction that's going to be subtracted from a grade with a minus"
+        "message": "The fraction that's going to be subtracted from a grade with a minus (-)"
     },
     "options_save": {
         "message": "Save"
