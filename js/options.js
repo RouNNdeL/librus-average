@@ -172,15 +172,18 @@ function saveForm(notify = false)
 
     if(defaultWeight < 0)
         defaultWeight = 0;
+    else if(defaultWeight > 10)
+        defaultWeight = 10;
+
 
     if(plusWeight > 1)
         plusWeight = 1;
-    if(plusWeight < 0)
+    else if(plusWeight < 0)
         plusWeight = 0;
 
     if(minusWeight > 1)
         minusWeight = 1;
-    if(minusWeight < 0)
+    else if(minusWeight < 0)
         minusWeight = 0;
 
     settings.defaultWeight = defaultWeight;
