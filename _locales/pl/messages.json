@@ -1,54 +1,53 @@
 {
-    "app_name": {
-        "message": "Średnia do Librusa"
-    },
-    "app_description": {
-        "message": "To rozszerzenie liczy średnią ważoną twoich ocen w dzienniku elektronicznym Librus Synergia"
-    },
-    "options_title": {
-        "message": "Ustawienia"
-    },
-    "options_policy": {
-        "message": "Licz do średniej"
-    },
-    "options_use_weights": {
-        "message": "Używaj wag"
-    },
-    "options_default_weight": {
-        "message": "Domyślna waga"
-    },
-    "options_plus_weight": {
-        "message": "Wartość plusa"
-    },
-    "options_minus_weight": {
-        "message": "Wartość minusa"
-    },
-    "options_policy_hint": {
-        "message": "Weź pod uwagę oznaczenie 'Licz do średniej'"
-    },
-    "options_use_weights_hint": {
-        "message": "Ta opcja umożliwia wyłączenie wag przy liczeniu średniej"
-    },
-    "options_default_weight_hint": {
-        "message": "Domyślna waga w przypadku jej braku. Wpisz 0 by nie brać ocen bez wagi pod uwagę."
-    },
-    "options_plus_weight_hint": {
-        "message": "Ułamek dodawany do oceny z plusem (+)"
-    },
-    "options_minus_weight_hint": {
-        "message": "Ułamek odejmowany od oceny z minusem (-)"
-    },
-    "options_save": {
-        "message": "Zapisz"
-    },
-    "options_saved_successfully": {
-        "message": "Zapisano pomyślnie!"
-    },
-
-    "options_save_failure": {
-        "message": "Wystąpił problem podczas zapisu!"
-    },
-    "options_reset_defaults": {
-        "message": "Przywróć ustawienia domyślne"
-    }
+  "app_name": {
+    "message": "Średnia do Librusa"
+  },
+  "app_description": {
+    "message": "To rozszerzenie liczy średnią ważoną twoich ocen w dzienniku elektronicznym Librus Synergia"
+  },
+  "options_title": {
+    "message": "Ustawienia"
+  },
+  "options_policy": {
+    "message": "Licz do średniej"
+  },
+  "options_use_weights": {
+    "message": "Używaj wag"
+  },
+  "options_default_weight": {
+    "message": "Domyślna waga"
+  },
+  "options_plus_weight": {
+    "message": "Wartość plusa"
+  },
+  "options_minus_weight": {
+    "message": "Wartość minusa"
+  },
+  "options_policy_hint": {
+    "message": "Weź pod uwagę oznaczenie 'Licz do średniej'"
+  },
+  "options_use_weights_hint": {
+    "message": "Ta opcja umożliwia wyłączenie wag przy liczeniu średniej"
+  },
+  "options_default_weight_hint": {
+    "message": "Domyślna waga w przypadku jej braku. Wpisz 0 by nie brać ocen bez wagi pod uwagę."
+  },
+  "options_plus_weight_hint": {
+    "message": "Ułamek dodawany do oceny z plusem"
+  },
+  "options_minus_weight_hint": {
+    "message": "Ułamek odejmowany od oceny z minusem"
+  },
+  "options_save": {
+    "message": "Zapisz"
+  },
+  "options_saved_successfully": {
+    "message": "Zapisano pomyślnie!"
+  },
+  "options_save_failure": {
+    "message": "Wystąpił problem podczas zapisu!"
+  },
+  "options_reset_defaults": {
+    "message": "Przywróć ustawienia domyślne"
+  }
 }

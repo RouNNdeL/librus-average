@@ -1,53 +1,53 @@
 {
-    "app_name": {
-        "message": "Librus Average"
-    },
-    "app_description": {
-        "message": "This extension shows averages hidden by Synergia"
-    },
-    "options_title": {
-        "message": "Extension settings"
-    },
-    "options_policy": {
-        "message": "Respect grades' policy"
-    },
-    "options_use_weights": {
-        "message": "Use weights"
-    },
-    "options_default_weight": {
-        "message": "Default weight"
-    },
-    "options_plus_weight": {
-        "message": "Positive fraction"
-    },
-    "options_minus_weight": {
-        "message": "Negative fraction"
-    },
-    "options_policy_hint": {
-        "message": "Whether to take grades marked as 'Do not count towards the average' into account for the calculations"
-    },
-    "options_use_weights_hint": {
-        "message": "This allows you to turn off the weights in the calculations"
-    },
-    "options_default_weight_hint": {
-        "message": "Value used for weight in case the grade has no weight assigned, set to 0 to skip those grades"
-    },
-    "options_plus_weight_hint": {
-        "message": "The fraction that's going to be added to a grade with a plus (+)"
-    },
-    "options_minus_weight_hint": {
-        "message": "The fraction that's going to be subtracted from a grade with a minus (-)"
-    },
-    "options_save": {
-        "message": "Save"
-    },
-    "options_saved_successfully": {
-        "message": "Saved successfully!"
-    },
-    "options_save_failure": {
-        "message": "Failed to save!"
-    },
-    "options_reset_defaults": {
-        "message": "Reset to defaults"
-    }
+  "app_name": {
+    "message": "Librus Average"
+  },
+  "app_description": {
+    "message": "This extension shows grade averages hidden by Librus Synergia"
+  },
+  "options_title": {
+    "message": "Extension settings"
+  },
+  "options_policy": {
+    "message": "Respect grades' policy"
+  },
+  "options_use_weights": {
+    "message": "Use weights"
+  },
+  "options_default_weight": {
+    "message": "Default weight"
+  },
+  "options_plus_weight": {
+    "message": "Positive fraction"
+  },
+  "options_minus_weight": {
+    "message": "Negative fraction"
+  },
+  "options_policy_hint": {
+    "message": "Whether to take grades marked as 'Do not count towards the average' into account for the calculations"
+  },
+  "options_use_weights_hint": {
+    "message": "This allows you to turn off the weights in the calculations"
+  },
+  "options_default_weight_hint": {
+    "message": "Value used in case the grade has no weight assigned, set to 0 to skip those grades"
+  },
+  "options_plus_weight_hint": {
+    "message": "The fraction added to a grade with a plus"
+  },
+  "options_minus_weight_hint": {
+    "message": "The fraction subtracted from a grade with a minus"
+  },
+  "options_save": {
+    "message": "Save"
+  },
+  "options_saved_successfully": {
+    "message": "Saved successfully!"
+  },
+  "options_save_failure": {
+    "message": "Failed to save!"
+  },
+  "options_reset_defaults": {
+    "message": "Reset to defaults"
+  }
 }
