@@ -71,3 +71,10 @@ body {
     bottom: auto !important;
     left: auto !important;
 }
+
+.toast {
+    text-align: center;
+    display: block;
+    padding-top: 12px !important;
+    width: 250px;
+}
