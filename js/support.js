@@ -62,13 +62,16 @@ const CONTENT_SCRIPT_LOADED = "CONTENT_SCRIPT_LOADED";
  * @param {function} callback function to receive the settings
  * @see DEFAULT_SETTINGS
  */
-function loadSettings(callback)
-{
-    chrome.storage.sync.get(function(items)
-    {
-        let settings = items[SETTINGS];
-        if(settings === undefined || settings === null)
-        {
+function loadSettings(callback) {
+    chrome.storage.sync.get([SETTINGS], function(items) {
+        let settings;
+        if(items === undefined) {
+            settings = DEFAULT_SETTINGS;
+            saveSettings(settings);
+        } else {
+            settings = items[SETTINGS];
+        }
+        if(settings === undefined || settings === null) {
             settings = DEFAULT_SETTINGS;
             saveSettings(settings);
         }
@@ -98,16 +101,13 @@ function loadSettings(callback)
  * @param {function} [callback] passed to {@link chrome.storage.sync.set()}
  * @see DEFAULT_SETTINGS
  */
-function saveSettings(settings, callback)
-{
-    if(typeof callback === "function")
-    {
+function saveSettings(settings, callback) {
+    if(typeof callback === "function") {
         const obj = {};
         obj[SETTINGS] = settings;
         chrome.storage.sync.set(obj, callback);
     }
-    else
-    {
+    else {
         const obj = {};
         obj[SETTINGS] = settings;
         chrome.storage.sync.set(obj);
@@ -119,16 +119,13 @@ function saveSettings(settings, callback)
  * @param {function} [callback] passed to {@link chrome.storage.sync.set()}
  * @see DEFAULT_SETTINGS
  */
-function clearSettings(callback)
-{
-    if(typeof callback === "function")
-    {
+function clearSettings(callback) {
+    if(typeof callback === "function") {
         const obj = {};
         obj[SETTINGS] = DEFAULT_SETTINGS;
         chrome.storage.sync.set(obj, callback);
     }
-    else
-    {
+    else {
         const obj = {};
         obj[SETTINGS] = DEFAULT_SETTINGS;
         chrome.storage.sync.set(obj);
@@ -139,16 +136,13 @@ function clearSettings(callback)
  * Initializes Google Analytics (analytics.js)
  * @param debug whether to initialize in debugging mode
  */
-function loadAnalytics(debug = false)
-{
-    (function(i, s, o, g, r, a, m)
-    {
+function loadAnalytics(debug = false) {
+    (function(i, s, o, g, r, a, m) {
         i['GoogleAnalyticsObject'] = r;
         //noinspection CommaExpressionJS
-        i[r] = i[r] || function()
-            {
-                (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date();
+        i[r] = i[r] || function() {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
         //noinspection CommaExpressionJS
         a = s.createElement(o),
             m = s.getElementsByTagName(o)[0];
@@ -162,8 +156,7 @@ function loadAnalytics(debug = false)
         window.ga_debug = {trace: true};
 
     ga('create', 'UA-88362826-2', 'auto');
-    ga('set', 'checkProtocolTask', function()
-    { /* nothing */
+    ga('set', 'checkProtocolTask', function() { /* nothing */
     });
     if(debug)
         ga('set', 'sendHitTask', null);
