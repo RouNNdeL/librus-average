@@ -3,12 +3,9 @@
  * Created by Krzysiek on 10/06/2017.
  */
 
-function onMessageListener(request, sender, sendResponse)
-{
-    switch(request[MSG_COM])
-    {
-        case CONTENT_SCRIPT_LOADED:
-        {
+function onMessageListener(request, sender, sendResponse) {
+    switch(request[MSG_COM]) {
+        case CONTENT_SCRIPT_LOADED: {
             //noinspection JSUnresolvedVariable
             ga('send', {
                 hitType: 'event',

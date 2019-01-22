@@ -4,8 +4,7 @@
 
 loadAnalytics(DEBUG_MODE);
 
-$(function()
-{
+$(function() {
     ga('send', 'pageview');
 
     localizeHtmlPage();
@@ -18,10 +17,8 @@ $(function()
  * Refreshes the form with fresh values
  * @see loadSettings()
  */
-function refreshForm()
-{
-    loadSettings(function(settings)
-    {
+function refreshForm() {
+    loadSettings(function(settings) {
         loadForm(settings);
     });
 }
@@ -29,13 +26,10 @@ function refreshForm()
 /**
  * Looks for every <code>.tooltipped</code> element, and replaces the <code>data-tooltip</code> with it's localized version
  */
-function localizeHintData()
-{
-    $(".tooltipped").each(function()
-    {
+function localizeHintData() {
+    $(".tooltipped").each(function() {
         const tag = $(this).attr("data-tooltip");
-        const msg = tag.replace(/__MSG_(\w+)__/g, function(match, v1)
-        {
+        const msg = tag.replace(/__MSG_(\w+)__/g, function(match, v1) {
             return v1 ? chrome.i18n.getMessage(v1) : '';
         });
         $(this).attr("data-tooltip", msg);
@@ -45,10 +39,8 @@ function localizeHintData()
 /**
  * Register onChange listeners to the form and onClick listeners to the buttons
  */
-function registerListeners()
-{
-    $("#btn-save").click(function()
-    {
+function registerListeners() {
+    $("#btn-save").click(function() {
         saveForm(true);
         ga('send', {
             hitType: 'event',
@@ -58,8 +50,7 @@ function registerListeners()
         });
     });
 
-    $("input").change(function(e)
-    {
+    $("input").change(function(e) {
         saveForm();
         ga('send', {
             hitType: 'event',
@@ -69,10 +60,8 @@ function registerListeners()
         });
     });
 
-    $("#btn-reset").click(function()
-    {
-        clearSettings(function()
-        {
+    $("#btn-reset").click(function() {
+        clearSettings(function() {
             refreshForm();
         });
         ga('send', {
@@ -84,18 +73,14 @@ function registerListeners()
     });
     let target;
     let t0;
-    $(".tooltipped").hover(function(e)
-    {
+    $(".tooltipped").hover(function(e) {
         target = e.target;
         t0 = new Date().getTime();
-    }, function(e)
-    {
-        if(e.target === target)
-        {
+    }, function(e) {
+        if(e.target === target) {
             let t1 = new Date().getTime();
             let dt = t1 - t0;
-            if(dt >= 225)
-            {
+            if(dt >= 225) {
                 ga('send', {
                     hitType: 'event',
                     eventCategory: 'Hints',
@@ -135,8 +120,7 @@ function registerListeners()
  * @param {object} [settings = DEFAULT_SETTINGS] settings to load into the form
  * @see DEFAULT_SETTINGS
  */
-function loadForm(settings = DEFAULT_SETTINGS)
-{
+function loadForm(settings = DEFAULT_SETTINGS) {
     const defaultWeight = $("#input-default-weight");
     const plusWeight = $("#input-plus-weight");
     const minusWeight = $("#input-minus-weight");
@@ -156,8 +140,7 @@ function loadForm(settings = DEFAULT_SETTINGS)
  * Validates and saves the form and shows a {@link Materialize.toast toast}
  * @param {boolean} [notify = false] will show a {@link Materialize.toast toast} if <code>true</code>
  */
-function saveForm(notify = false)
-{
+function saveForm(notify = false) {
     const settings = {};
 
     let defaultWeight = $("#input-default-weight").val().replace(/[^\d.-]/g, "");
@@ -192,11 +175,9 @@ function saveForm(notify = false)
     settings.respectPolicy = policy;
     settings.useWeights = weights;
 
-    saveSettings(settings, function()
-    {
+    saveSettings(settings, function() {
         refreshForm();
-        if(notify === true)
-        {
+        if(notify === true) {
             const message = chrome.i18n.getMessage("options_saved_successfully");
             Materialize.toast(message, 800);
         }
@@ -204,10 +185,8 @@ function saveForm(notify = false)
 }
 
 //Credit: https://stackoverflow.com/a/39810769/4061413
-function replace_i18n(obj, tag)
-{
-    const msg = tag.replace(/__MSG_(\w+)__/g, function(match, v1)
-    {
+function replace_i18n(obj, tag) {
+    const msg = tag.replace(/__MSG_(\w+)__/g, function(match, v1) {
         return v1 ? chrome.i18n.getMessage(v1) : '';
     });
 
@@ -215,13 +194,11 @@ function replace_i18n(obj, tag)
         obj.innerHTML = msg;
 }
 
-function localizeHtmlPage()
-{
+function localizeHtmlPage() {
     // Localize using __MSG_***__ data tags
     const data = document.querySelectorAll('[data-localize]');
 
-    for(let i in data) if(data.hasOwnProperty(i))
-    {
+    for(let i in data) if(data.hasOwnProperty(i)) {
         let obj = data[i];
         let tag = obj.getAttribute('data-localize').toString();
 
@@ -231,8 +208,7 @@ function localizeHtmlPage()
     // Localize everything else by replacing all __MSG_***__ tags
     const page = document.getElementsByTagName('html');
 
-    for(let j = 0; j < page.length; j++)
-    {
+    for(let j = 0; j < page.length; j++) {
         const obj = page[j];
         const tag = obj.innerHTML.toString();
 

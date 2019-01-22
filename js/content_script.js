@@ -5,10 +5,8 @@
 
 let columnNumbers = DEFAULT_COLUMN_NUMBERS;
 
-$(function()
-{
-    loadSettings(function(settings)
-    {
+$(function() {
+    loadSettings(function(settings) {
         columnNumbers = getColumnNumbers();
         setup(settings);
     });
@@ -22,8 +20,7 @@ $(function()
  * @param weight
  * @constructor
  */
-function Mark(mark, weight)
-{
+function Mark(mark, weight) {
     this.mark = mark;
     this.weight = weight;
 }
@@ -34,8 +31,7 @@ function Mark(mark, weight)
  * @param {Mark[]} markList an array of {@link Mark Marks} to create the object from
  * @constructor
  */
-function MarkList(markList)
-{
+function MarkList(markList) {
     if(markList === undefined)
         this.markList = [];
     else
@@ -45,13 +41,11 @@ function MarkList(markList)
      * Calculates a weighted average of all {@link Mark Marks} in the markList
      * @returns {number} weighted average
      */
-    this.getAverage = function()
-    {
+    this.getAverage = function() {
         let markSum = 0;
         let weightSum = 0;
 
-        for(let i = 0; i < this.markList.length; i++)
-        {
+        for(let i = 0; i < this.markList.length; i++) {
             markSum += this.markList[i].mark * this.markList[i].weight;
             weightSum += this.markList[i].weight;
         }
@@ -64,8 +58,7 @@ function MarkList(markList)
      * @param {MarkList} list to be concatenated with <code>this</code>
      * @returns {MarkList} a new object containing all marks
      */
-    this.concat = function(list)
-    {
+    this.concat = function(list) {
         return new MarkList(this.markList.concat(list.markList));
     };
 }
@@ -73,15 +66,11 @@ function MarkList(markList)
 /**
  * Registers a {@link  chrome.storage.onChanged} listener to update the averages when the settings change
  */
-function registerOnChangedListener()
-{
+function registerOnChangedListener() {
     //noinspection JSUnusedLocalSymbols
-    chrome.storage.onChanged.addListener(function(changes, namespace)
-    {
-        for(let key in changes)
-        {
-            if(key === SETTINGS)
-            {
+    chrome.storage.onChanged.addListener(function(changes, namespace) {
+        for(let key in changes) {
+            if(key === SETTINGS) {
                 setup(changes[SETTINGS]["newValue"])
             }
         }
@@ -95,8 +84,7 @@ function registerOnChangedListener()
  * @param match
  * @returns {boolean}
  */
-jQuery.expr[':'].regex = function(elem, index, match)
-{
+jQuery.expr[':'].regex = function(elem, index, match) {
     const matchParams = match[3].split(','),
         validLabels = /^(data|css):/,
         attr = {
@@ -116,8 +104,7 @@ jQuery.expr[':'].regex = function(elem, index, match)
  * @param {RegExp} regex
  * @returns {boolean} true if matches
  */
-function columnMatches(column, regex)
-{
+function columnMatches(column, regex) {
     return regex.exec(column.text()) !== null ||
         regex.exec(column.attr("title")) !== null;
 }
@@ -127,37 +114,30 @@ function columnMatches(column, regex)
  * @returns {{firstTermMarks: number, firstTermAverage: number, secondTermMarks: number, secondTermAverage: number, yearAverage: number}}
  * @see DEFAULT_COLUMN_NUMBERS
  */
-function getColumnNumbers()
-{
+function getColumnNumbers() {
     const columns = $("table.decorated.stretch").find("thead")
         .find("tr").eq(1).find("td");
     const columnNumbers = {};
-    columns.each(function(i)
-    {
+    columns.each(function(i) {
         const offsetColumnNumber = i + THEAD_COLUMN_OFFSET;
         if(columnMatches($(this), REGEX_FIRST_TERM_MARKS) &&
-            columnNumbers.firstTermMarks === undefined)
-        {
+            columnNumbers.firstTermMarks === undefined) {
             columnNumbers.firstTermMarks = offsetColumnNumber;
         }
         else if(columnMatches($(this), REGEX_FIRST_TERM_AVERAGE) &&
-            columnNumbers.firstTermAverage === undefined)
-        {
+            columnNumbers.firstTermAverage === undefined) {
             columnNumbers.firstTermAverage = offsetColumnNumber;
         }
         else if(columnMatches($(this), REGEX_SECOND_TERM_MARKS) &&
-            columnNumbers.secondTermMarks === undefined)
-        {
+            columnNumbers.secondTermMarks === undefined) {
             columnNumbers.secondTermMarks = offsetColumnNumber;
         }
-        else if(columnMatches($(this), REGEX_SECOND_TERM_AVERAGE) &&
-            columnNumbers.secondTermAverage === undefined)
-        {
+        else if(columnMatches($(this), REGEX_SECOND_TEłRM_AVERAGE) &&
+            columnNumbers.secondTermAverage === undefined) {
             columnNumbers.secondTermAverage = offsetColumnNumber;
         }
         else if(columnMatches($(this), REGEX_YEAR_AVERAGE) &&
-            columnNumbers.yearAverage === undefined)
-        {
+            columnNumbers.yearAverage === undefined) {
             columnNumbers.yearAverage = offsetColumnNumber;
         }
     });
@@ -173,12 +153,10 @@ function getColumnNumbers()
  * @returns {MarkList} for a single subject in a single school term
  * @see DEFAULT_SETTINGS
  */
-function getMarks(row, column, settings = DEFAULT_SETTINGS)
-{
+function getMarks(row, column, settings = DEFAULT_SETTINGS) {
     let marks = new MarkList();
 
-    $(row).find("td").eq(column).find("span.grade-box  a").each(function()
-    {
+    $(row).find("td").eq(column).find("span.grade-box  a").each(function() {
         let rawMark = $(this).text();
         let markDescription = $(this).attr("title");
         let markMatch = rawMark.match(REGEX_MARK);
@@ -188,8 +166,7 @@ function getMarks(row, column, settings = DEFAULT_SETTINGS)
 
         let policy = policyMatch !== null ? policyMatch[1] : POLICY_POSITIVE;
 
-        if(markMatch !== null && (!settings.respectPolicy || policy === POLICY_POSITIVE))
-        {
+        if(markMatch !== null && (!settings.respectPolicy || policy === POLICY_POSITIVE)) {
             let mark = parseInt(markMatch[1]);
             if(markMatch[2] === "+")
                 mark += settings.plusWeight;
@@ -209,14 +186,12 @@ function getMarks(row, column, settings = DEFAULT_SETTINGS)
  * @param {object} [settings = DEFAULT_SETTINGS] settings that are going to be used in the setup
  * @see DEFAULT_SETTINGS
  */
-function setup(settings = DEFAULT_SETTINGS)
-{
+function setup(settings = DEFAULT_SETTINGS) {
     //Those are rows corresponding to a subject
     //noinspection CssInvalidPseudoSelector, UnexpectedToken
     $("table.decorated.stretch tbody tr:regex(class, line[0,1])")
         .not("tr:regex(name, przedmioty_all)")
-        .each(function()
-        {
+        .each(function() {
             let firstTermMarks = getMarks(this, columnNumbers.firstTermMarks, settings);
             let secondTermMarks = getMarks(this, columnNumbers.secondTermMarks, settings);
             let yearMarks = firstTermMarks.concat(secondTermMarks);
@@ -247,18 +222,15 @@ function setup(settings = DEFAULT_SETTINGS)
         });
 }
 
-function sendAnalyticsEvent(com, data = {}, responseCallback = null)
-{
+function sendAnalyticsEvent(com, data = {}, responseCallback = null) {
     const request = {};
     request[MSG_COM] = com;
     request[MSG_DATA] = data;
 
-    if(typeof responseCallback === "function")
-    {
+    if(typeof responseCallback === "function") {
         chrome.runtime.sendMessage(request, responseCallback);
     }
-    else
-    {
+    else {
         chrome.runtime.sendMessage(request);
     }
 }
