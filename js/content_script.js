@@ -132,7 +132,7 @@ function getColumnNumbers() {
             columnNumbers.secondTermMarks === undefined) {
             columnNumbers.secondTermMarks = offsetColumnNumber;
         }
-        else if(columnMatches($(this), REGEX_SECOND_TEłRM_AVERAGE) &&
+        else if(columnMatches($(this), REGEX_SECOND_TERM_AVERAGE) &&
             columnNumbers.secondTermAverage === undefined) {
             columnNumbers.secondTermAverage = offsetColumnNumber;
         }
