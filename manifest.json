@@ -21,7 +21,7 @@
         "https://synergia.librus.pl/przegladaj_oceny/uczen"
       ],
       "js": [
-        "js/jquery-3.2.1.min.js",
+        "js/jquery-3.3.1.min.js",
         "js/support.js",
         "js/content_script.js"
       ]
