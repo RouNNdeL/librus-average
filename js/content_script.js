@@ -154,13 +154,15 @@ function getColumnNumbers() {
  * @param {object} row an element that represents a single subject grabbed with jQuery from the subject table
  * @param {number} column index of the column in said table
  * @param {object} [settings = DEFAULT_SETTINGS] used to check for the weights, and the policy
- * @returns {MarkList} for a single subject in a single school term
+ * @returns {MarkList|boolean} for a single subject in a single school term or false when no grade boxes where found
  * @see DEFAULT_SETTINGS
  */
 function getMarks(row, column, settings = DEFAULT_SETTINGS) {
     let marks = new MarkList();
+    let anyGrade = false;
 
     $(row).find("td").eq(column).find("span.grade-box  a").each(function() {
+        anyGrade = true;
         let rawMark = $(this).text();
         let markDescription = $(this).attr("title");
         let markMatch = rawMark.match(REGEX_MARK);
@@ -180,7 +182,7 @@ function getMarks(row, column, settings = DEFAULT_SETTINGS) {
         }
     });
 
-    return marks;
+    return anyGrade ? marks : false;
 }
 
 /**
@@ -199,12 +201,21 @@ function setup(settings = DEFAULT_SETTINGS) {
         .each(function() {
             let firstTermMarks = getMarks(this, columnNumbers.firstTermMarks, settings);
             let secondTermMarks = getMarks(this, columnNumbers.secondTermMarks, settings);
-            let yearMarks = firstTermMarks.concat(secondTermMarks);
+            let yearMarks;
 
-            if(settings.hideEmpty && yearMarks.getLength() === 0) {
-                $(this).css("display", "none");
-                return;
+            if(firstTermMarks === false && secondTermMarks === false) {
+                if(settings.hideEmpty) {
+                    $(this).css("display", "none");
+                    return;
+                }
+                yearMarks = false;
             }
+            else {
+                yearMarks = firstTermMarks !== false ?
+                    firstTermMarks.concat(secondTermMarks !== false ? secondTermMarks : new MarkList()) :
+                    secondTermMarks;
+            }
+
             $(this).css("display", "");
 
             //Make sure the rows alter between line0 and line1 classes
@@ -214,7 +225,7 @@ function setup(settings = DEFAULT_SETTINGS) {
             const firstTermCell = $(this).find("td").eq(columnNumbers.firstTermAverage);
             // Required, as Librus forgot to add that class for this cell
             firstTermCell.addClass("center");
-            if(firstTermMarks.getAverage() > 0)
+            if(firstTermMarks !== false && firstTermMarks.getAverage() > 0)
                 firstTermCell.text(firstTermMarks.getAverage().toFixed(2));
             else
                 firstTermCell.text("-");
@@ -222,7 +233,7 @@ function setup(settings = DEFAULT_SETTINGS) {
             const secondTermCell = $(this).find("td").eq(columnNumbers.secondTermAverage);
             // Not required, but we'll add the class just in case
             secondTermCell.addClass("center");
-            if(secondTermMarks.getAverage() > 0)
+            if(secondTermMarks !== false && secondTermMarks.getAverage() > 0)
                 secondTermCell.text(secondTermMarks.getAverage().toFixed(2));
             else
                 secondTermCell.text("-");
@@ -230,7 +241,7 @@ function setup(settings = DEFAULT_SETTINGS) {
             const yearCell = $(this).find("td").eq(columnNumbers.yearAverage);
             // Not required, but we'll add the class just in case
             yearCell.addClass("center");
-            if(yearMarks.getAverage() > 0)
+            if(yearMarks !== false && yearMarks.getAverage() > 0)
                 yearCell.text(yearMarks.getAverage().toFixed(2));
             else
                 yearCell.text("-");
