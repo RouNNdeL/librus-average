@@ -53,6 +53,10 @@ function MarkList(markList) {
         return weightSum !== 0 ? markSum / weightSum : 0;
     };
 
+    this.getLength = function() {
+        return this.markList.length;
+    };
+
     /**
      * Creates a new {@link MarkList} object that contains {@link Mark Marks} from <code>this</code> and the provided {@link MarkList}
      * @param {MarkList} list to be concatenated with <code>this</code>
@@ -187,8 +191,9 @@ function getMarks(row, column, settings = DEFAULT_SETTINGS) {
  * @see DEFAULT_SETTINGS
  */
 function setup(settings = DEFAULT_SETTINGS) {
-    //Those are rows corresponding to a subject
+    // Those are rows corresponding to a subject
     //noinspection CssInvalidPseudoSelector, UnexpectedToken
+    let line = 0;
     $("div.container-background > table.decorated.stretch > tbody > tr:regex(class, line[0,1])")
         .not("tr:regex(name, przedmioty_all)").not(".bolded")
         .each(function() {
@@ -196,8 +201,18 @@ function setup(settings = DEFAULT_SETTINGS) {
             let secondTermMarks = getMarks(this, columnNumbers.secondTermMarks, settings);
             let yearMarks = firstTermMarks.concat(secondTermMarks);
 
+            if(settings.hideEmpty && yearMarks.getLength() === 0) {
+                $(this).css("display", "none");
+                return;
+            }
+            $(this).css("display", "");
+
+            //Make sure the rows alter between line0 and line1 classes
+            $(this).removeClass("line0 line1").addClass(`line${line}`);
+            line = line === 1 ? 0 : 1;
+
             const firstTermCell = $(this).find("td").eq(columnNumbers.firstTermAverage);
-            //Required, as Librus forgot to add that class for this cell
+            // Required, as Librus forgot to add that class for this cell
             firstTermCell.addClass("center");
             if(firstTermMarks.getAverage() > 0)
                 firstTermCell.text(firstTermMarks.getAverage().toFixed(2));
@@ -205,7 +220,7 @@ function setup(settings = DEFAULT_SETTINGS) {
                 firstTermCell.text("-");
 
             const secondTermCell = $(this).find("td").eq(columnNumbers.secondTermAverage);
-            //Not required, but we'll add the class just in case
+            // Not required, but we'll add the class just in case
             secondTermCell.addClass("center");
             if(secondTermMarks.getAverage() > 0)
                 secondTermCell.text(secondTermMarks.getAverage().toFixed(2));
@@ -213,7 +228,7 @@ function setup(settings = DEFAULT_SETTINGS) {
                 secondTermCell.text("-");
 
             const yearCell = $(this).find("td").eq(columnNumbers.yearAverage);
-            //Not required, but we'll add the class just in case
+            // Not required, but we'll add the class just in case
             yearCell.addClass("center");
             if(yearMarks.getAverage() > 0)
                 yearCell.text(yearMarks.getAverage().toFixed(2));

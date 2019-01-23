@@ -11,6 +11,9 @@
   "options_policy": {
     "message": "Respect grades' policy"
   },
+  "options_hide": {
+    "message": "Hide subjects"
+  },
   "options_use_weights": {
     "message": "Use weights"
   },
@@ -25,6 +28,9 @@
   },
   "options_policy_hint": {
     "message": "Whether to take grades marked as 'Do not count towards the average' into account for the calculations"
+  },
+  "options_hide_hint": {
+    "message": "Hides subjects that the user doesn't have any grades for"
   },
   "options_use_weights_hint": {
     "message": "This allows you to turn off the weights in the calculations"

@@ -126,12 +126,14 @@ function loadForm(settings = DEFAULT_SETTINGS) {
     const minusWeight = $("#input-minus-weight");
     const policy = $("#checkbox-policy");
     const weights = $("#checkbox-weights");
+    const hide = $("#checkbox-hide");
 
     defaultWeight.val(settings.defaultWeight);
     plusWeight.val(settings.plusWeight);
     minusWeight.val(settings.minusWeight);
     policy.prop("checked", settings.respectPolicy);
     weights.prop("checked", settings.useWeights);
+    hide.prop("checked", settings.hideEmpty);
 
     Materialize.updateTextFields();
 }
@@ -148,6 +150,7 @@ function saveForm(notify = false) {
     let minusWeight = $("#input-minus-weight").val().replace(/[^\d.-]/g, "");
     let policy = $("#checkbox-policy")[0].checked;
     let weights = $("#checkbox-weights")[0].checked;
+    let hide = $("#checkbox-hide")[0].checked;
 
     defaultWeight = parseInt(defaultWeight);
     plusWeight = parseFloat(plusWeight);
@@ -174,6 +177,7 @@ function saveForm(notify = false) {
     settings.minusWeight = minusWeight;
     settings.respectPolicy = policy;
     settings.useWeights = weights;
+    settings.hideEmpty = hide;
 
     saveSettings(settings, function() {
         refreshForm();

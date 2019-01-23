@@ -11,6 +11,9 @@
   "options_policy": {
     "message": "Licz do średniej"
   },
+  "options_hide": {
+    "message": "Ukryj przedmioty"
+  },
   "options_use_weights": {
     "message": "Używaj wag"
   },
@@ -25,6 +28,9 @@
   },
   "options_policy_hint": {
     "message": "Weź pod uwagę oznaczenie 'Licz do średniej'"
+  },
+  "options_hide_hint": {
+    "message": "Ukrywa przedmioty, z których uczeń nie ma ani jednej oceny"
   },
   "options_use_weights_hint": {
     "message": "Ta opcja umożliwia wyłączenie wag przy liczeniu średniej"

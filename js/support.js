@@ -34,6 +34,7 @@ const MINUS_WEIGHT = 0.25;
 const DEFAULT_WEIGHT = 1;
 const RESPECT_POLICY = true;
 const USE_WEIGHTS = true;
+const HIDE_EMPTY = false;
 
 /**
  * This is an example of a settings object
@@ -49,7 +50,8 @@ const DEFAULT_SETTINGS = {
     minusWeight: MINUS_WEIGHT,
     defaultWeight: DEFAULT_WEIGHT,
     respectPolicy: RESPECT_POLICY,
-    useWeights: USE_WEIGHTS
+    useWeights: USE_WEIGHTS,
+    hideEmpty: HIDE_EMPTY
 };
 
 //Messaging constants
@@ -90,6 +92,9 @@ function loadSettings(callback) {
 
         if(settings.useWeights === null || settings.useWeights === undefined)
             settings.useWeights = USE_WEIGHTS;
+
+        if(settings.hideEmpty === null || settings.hideEmpty === undefined)
+            settings.hideEmpty = HIDE_EMPTY;
 
         callback(settings);
     });
