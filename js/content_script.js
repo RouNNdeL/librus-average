@@ -189,8 +189,8 @@ function getMarks(row, column, settings = DEFAULT_SETTINGS) {
 function setup(settings = DEFAULT_SETTINGS) {
     //Those are rows corresponding to a subject
     //noinspection CssInvalidPseudoSelector, UnexpectedToken
-    $("table.decorated.stretch tbody tr:regex(class, line[0,1])")
-        .not("tr:regex(name, przedmioty_all)")
+    $("div.container-background > table.decorated.stretch > tbody > tr:regex(class, line[0,1])")
+        .not("tr:regex(name, przedmioty_all)").not(".bolded")
         .each(function() {
             let firstTermMarks = getMarks(this, columnNumbers.firstTermMarks, settings);
             let secondTermMarks = getMarks(this, columnNumbers.secondTermMarks, settings);
