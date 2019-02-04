@@ -119,6 +119,11 @@ function saveSettings(settings, callback) {
     }
 }
 
+function getExtensionVersion() {
+    const manifestData = chrome.runtime.getManifest();
+    return manifestData.version;
+}
+
 /**
  * Resets the settings to their default values
  * @param {function} [callback] passed to {@link chrome.storage.sync.set()}
@@ -161,6 +166,7 @@ function loadAnalytics(debug = false) {
         window.ga_debug = {trace: true};
 
     ga('create', 'UA-88362826-2', 'auto');
+    ga('set', 'dimension1', getExtensionVersion());
     ga('set', 'checkProtocolTask', function() {
         /* nothing */
     });
