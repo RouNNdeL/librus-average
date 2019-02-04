@@ -1,4 +1,4 @@
-const DEBUG_MODE = false;
+const DEBUG_MODE = true;
 
 const SETTINGS = "settings";
 
@@ -161,7 +161,13 @@ function loadAnalytics(debug = false) {
         window.ga_debug = {trace: true};
 
     ga('create', 'UA-88362826-2', 'auto');
-    ga('set', 'checkProtocolTask', function() { /* nothing */
+    ga('set', 'checkProtocolTask', function() {
+        /* nothing */
+    });
+    ga('set', 'checkStorageTask', function() {
+        /*
+         * Has to be ignored to work in Firefox, due to cookies not working in extension pages in Firefox
+         */
     });
     if(debug)
         ga('set', 'sendHitTask', null);

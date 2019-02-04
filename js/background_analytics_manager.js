@@ -20,4 +20,3 @@ function onMessageListener(request, sender, sendResponse) {
 chrome.runtime.onMessage.addListener(onMessageListener);
 
 loadAnalytics(DEBUG_MODE);
-ga('send', "pageview");
