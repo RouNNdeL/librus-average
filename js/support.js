@@ -177,4 +177,5 @@ function loadAnalytics(debug = false) {
     });
 
     if(debug) ga('set', 'sendHitTask', null);
+    ga('send', 'pageview', window.location.pathname);
 }

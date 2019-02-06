@@ -5,8 +5,6 @@
 loadAnalytics(DEBUG_MODE);
 
 $(function() {
-    ga('send', 'pageview', '/options.html');
-
     localizeHtmlPage();
     localizeHintData();
     registerListeners();
