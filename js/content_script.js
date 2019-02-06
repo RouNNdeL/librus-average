@@ -4,14 +4,20 @@
 'use strict';
 
 let columnNumbers = DEFAULT_COLUMN_NUMBERS;
+let start_time;
 
 $(function() {
+    start_time = Date.now();
     loadSettings(function(settings) {
         columnNumbers = getColumnNumbers();
         setup(settings);
     });
     registerOnChangedListener();
     sendAnalyticsEvent(CONTENT_SCRIPT_LOADED);
+
+    $(window).on('beforeunload', function() {
+        sendAnalyticsEvent(CONTENT_SCRIPT_EXITING, Math.round((Date.now() - start_time) / 1000));
+    });
 });
 
 /**

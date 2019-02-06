@@ -58,6 +58,7 @@ const DEFAULT_SETTINGS = {
 const MSG_COM = "com";
 const MSG_DATA = "data";
 const CONTENT_SCRIPT_LOADED = "CONTENT_SCRIPT_LOADED";
+const CONTENT_SCRIPT_EXITING = "CONTENT_SCRIPT_EXITING";
 
 /**
  * Loads settings from Chrome's sync storage, if no settings are found returns default settings and saves them
@@ -162,8 +163,7 @@ function loadAnalytics(debug = false) {
     })(window, document, 'script', debug ? 'https://www.google-analytics.com/analytics_debug.js'
         : 'https://www.google-analytics.com/analytics.js', 'ga');
 
-    if(debug)
-        window.ga_debug = {trace: true};
+    if(debug) window.ga_debug = {trace: true};
 
     ga('create', 'UA-88362826-2', 'auto');
     ga('set', 'dimension1', getExtensionVersion());
@@ -175,6 +175,6 @@ function loadAnalytics(debug = false) {
          * Has to be ignored to work in Firefox, due to cookies not working in extension pages in Firefox
          */
     });
-    if(debug)
-        ga('set', 'sendHitTask', null);
+
+    if(debug) ga('set', 'sendHitTask', null);
 }
