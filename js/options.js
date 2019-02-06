@@ -52,11 +52,19 @@ function registerListeners() {
 
     $("input").change(function(e) {
         saveForm();
+        const target = $(e.target);
+        let eventValue = target.val();
+        if(isNaN(parseFloat(eventValue))) {
+            eventValue = target[0].checked ? 1 : 0;
+        } else {
+            eventValue = parseFloat(eventValue);
+        }
         ga('send', {
             hitType: 'event',
             eventCategory: 'Inputs',
             eventAction: 'changeValue',
-            eventLabel: $(e.target).attr("id")
+            eventLabel: target.attr("id"),
+            eventValue: eventValue < 1 ? Math.round(eventValue * 100) : eventValue
         });
     });
 
