@@ -2,6 +2,13 @@ const DEBUG_MODE = false;
 
 const SETTINGS = "settings";
 
+const GA_LOCAL_STORAGE_KEY = "ga:clientId";
+
+const BROWSER_CHROME = "BROWSER_CHROME";
+const BROWSER_FIREFOX = "BROWSER_FIREFOX";
+const BROWSER_OPERA = "BROWSER_OPERA";
+const BROWSER_OTHER = "BROWSER_OTHER";
+
 const REGEX_WEIGHT = /Waga: (\d+)/;
 const REGEX_MARK = /(\d)([+-]?)/;
 const REGEX_POLICY = /Licz do średniej:\s*(tak|nie)/;
@@ -126,6 +133,29 @@ function getExtensionVersion() {
 }
 
 /**
+ * @return {Promise<String>}
+ */
+function getBrowser() {
+    return new Promise(resolve => {
+        if(typeof browser === "undefined") {
+            resolve(BROWSER_CHROME);
+        }
+        browser.runtime.getBrowserInfo().then(function(info) {
+            switch(info.name) {
+                case "Firefox":
+                    resolve(BROWSER_FIREFOX);
+                    break;
+                case "Opera":
+                    resolve(BROWSER_OPERA);
+                    break;
+                default:
+                    resolve(BROWSER_OTHER);
+            }
+        })
+    });
+}
+
+/**
  * Resets the settings to their default values
  * @param {function} [callback] passed to {@link chrome.storage.sync.set()}
  * @see DEFAULT_SETTINGS
@@ -147,7 +177,7 @@ function clearSettings(callback) {
  * Initializes Google Analytics (analytics.js)
  * @param debug whether to initialize in debugging mode
  */
-function loadAnalytics(debug = false) {
+async function loadAnalytics(debug = false) {
     (function(i, s, o, g, r, a, m) {
         i['GoogleAnalyticsObject'] = r;
         //noinspection CommaExpressionJS
@@ -165,15 +195,22 @@ function loadAnalytics(debug = false) {
 
     if(debug) window.ga_debug = {trace: true};
 
-    ga('create', 'UA-88362826-2', 'auto');
+    const browser = await getBrowser();
+    if(browser === BROWSER_FIREFOX) {
+        ga('create', 'UA-88362826-2', {
+            'storage': 'none',
+            'clientId': localStorage.getItem(GA_LOCAL_STORAGE_KEY)
+        });
+        ga(function(tracker) {
+            localStorage.setItem(GA_LOCAL_STORAGE_KEY, tracker.get('clientId'));
+        });
+    } else {
+        ga('create', 'UA-88362826-2', 'auto');
+    }
+
     ga('set', 'dimension1', getExtensionVersion());
     ga('set', 'checkProtocolTask', function() {
         /* nothing */
-    });
-    ga('set', 'checkStorageTask', function() {
-        /*
-         * Has to be ignored to work in Firefox, due to cookies not working in extension pages in Firefox
-         */
     });
 
     if(debug) ga('set', 'sendHitTask', null);
