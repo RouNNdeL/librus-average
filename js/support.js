@@ -138,20 +138,24 @@ function getExtensionVersion() {
 function getBrowser() {
     return new Promise(resolve => {
         if(typeof browser === "undefined") {
-            resolve(BROWSER_CHROME);
-        }
-        browser.runtime.getBrowserInfo().then(function(info) {
-            switch(info.name) {
-                case "Firefox":
-                    resolve(BROWSER_FIREFOX);
-                    break;
-                case "Opera":
-                    resolve(BROWSER_OPERA);
-                    break;
-                default:
-                    resolve(BROWSER_OTHER);
+            if(navigator.userAgent.match(/Opera/) !== null) {
+                resolve(BROWSER_OPERA);
+            } else if(navigator.userAgent.match(/Chrome/) !== null) {
+                resolve(BROWSER_CHROME);
+            } else {
+                resolve(BROWSER_OTHER);
             }
-        })
+        } else {
+            browser.runtime.getBrowserInfo().then(function(info) {
+                switch(info.name) {
+                    case "Firefox":
+                        resolve(BROWSER_FIREFOX);
+                        break;
+                    default:
+                        resolve(BROWSER_OTHER);
+                }
+            });
+        }
     });
 }
 
