@@ -32,7 +32,7 @@
     "https://synergia.librus.pl/",
     "https://fonts.googleapis.com/"
   ],
-  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com https://www.google-analytics.com; object-src 'self'",
+  "content_security_policy": "script-src 'self'; object-src 'self'",
   "background": {
     "scripts": [
       "/js/support.js",
