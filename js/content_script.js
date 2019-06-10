@@ -47,13 +47,15 @@ function MarkList(markList) {
      * Calculates a weighted average of all {@link Mark Marks} in the markList
      * @returns {number} weighted average
      */
-    this.getAverage = function() {
+    this.getAverage = function(zeros = false) {
         let markSum = 0;
         let weightSum = 0;
 
         for(let i = 0; i < this.markList.length; i++) {
-            markSum += this.markList[i].mark * this.markList[i].weight;
-            weightSum += this.markList[i].weight;
+            if(zeros || this.markList[i].mark > 0) {
+                markSum += this.markList[i].mark * this.markList[i].weight;
+                weightSum += this.markList[i].weight;
+            }
         }
 
         return weightSum !== 0 ? markSum / weightSum : 0;
@@ -231,24 +233,24 @@ function setup(settings = DEFAULT_SETTINGS) {
             const firstTermCell = $(this).find("td").eq(columnNumbers.firstTermAverage);
             // Required, as Librus forgot to add that class for this cell
             firstTermCell.addClass("center");
-            if(firstTermMarks !== false && firstTermMarks.getAverage() > 0)
-                firstTermCell.text(firstTermMarks.getAverage().toFixed(2));
+            if(firstTermMarks !== false && firstTermMarks.getAverage(settings.zeroAvg) > 0)
+                firstTermCell.text(firstTermMarks.getAverage(settings.zeroAvg).toFixed(2));
             else
                 firstTermCell.text("-");
 
             const secondTermCell = $(this).find("td").eq(columnNumbers.secondTermAverage);
             // Not required, but we'll add the class just in case
             secondTermCell.addClass("center");
-            if(secondTermMarks !== false && secondTermMarks.getAverage() > 0)
-                secondTermCell.text(secondTermMarks.getAverage().toFixed(2));
+            if(secondTermMarks !== false && secondTermMarks.getAverage(settings.zeroAvg) > 0)
+                secondTermCell.text(secondTermMarks.getAverage(settings.zeroAvg).toFixed(2));
             else
                 secondTermCell.text("-");
 
             const yearCell = $(this).find("td").eq(columnNumbers.yearAverage);
             // Not required, but we'll add the class just in case
             yearCell.addClass("center");
-            if(yearMarks !== false && yearMarks.getAverage() > 0)
-                yearCell.text(yearMarks.getAverage().toFixed(2));
+            if(yearMarks !== false && yearMarks.getAverage(settings.zeroAvg) > 0)
+                yearCell.text(yearMarks.getAverage(settings.zeroAvg).toFixed(2));
             else
                 yearCell.text("-");
         });

@@ -26,6 +26,9 @@
   "options_minus_weight": {
     "message": "Negative fraction"
   },
+  "options_zero_avg": {
+    "message": "Count zeros"
+  },
   "options_policy_hint": {
     "message": "Whether to take grades marked as 'Do not count towards the average' into account for the calculations"
   },
@@ -43,6 +46,9 @@
   },
   "options_minus_weight_hint": {
     "message": "The fraction subtracted from a grade with a minus"
+  },
+  "options_zero_avg_hint": {
+    "message": "Count '0' grades towards the average"
   },
   "options_save": {
     "message": "Save"
